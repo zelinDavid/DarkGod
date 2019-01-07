@@ -61,20 +61,12 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Assets\Scripts\Common\Constants.cs" />
-    <Compile Include="Assets\Scripts\Common\LoopDragonAni.cs" />
-    <Compile Include="Assets\Scripts\Common\PathDefine.cs" />
-    <Compile Include="Assets\Scripts\Common\PETools.cs" />
-    <Compile Include="Assets\Scripts\Common\SystemRoot.cs" />
-    <Compile Include="Assets\Scripts\Common\WindowRoot.cs" />
+    <Compile Include="Assets\Scripts\Common\ResSvc.cs" />
     <Compile Include="Assets\Scripts\GameRoot.cs" />
-    <Compile Include="Assets\Scripts\Service\AudioSvc.cs" />
-    <Compile Include="Assets\Scripts\Service\ResSvc.cs" />
     <Compile Include="Assets\Scripts\System\LoginSys.cs" />
-    <Compile Include="Assets\Scripts\UIWindow\CreateWnd.cs" />
-    <Compile Include="Assets\Scripts\UIWindow\DynamicWnd.cs" />
-    <Compile Include="Assets\Scripts\UIWindow\LoadingWnd.cs" />
+    <Compile Include="Assets\Scripts\System\SystemRoot.cs" />
     <Compile Include="Assets\Scripts\UIWindow\LoginWnd.cs" />
+    <Compile Include="Assets\Scripts\UIWindow\WindowRoot.cs" />
     <None Include="Assets\Resources\ResCfgs\rdname.xml" />
     <None Include="Assets\Compond\Shader\MogoSkybox.shader" />
     <Reference Include="Unity.TextMeshPro.Editor">

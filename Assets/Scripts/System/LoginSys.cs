@@ -9,37 +9,15 @@
 using UnityEngine;
 
 public class LoginSys : SystemRoot {
-    public static LoginSys Instance = null;
+  
+    protected void Init()
+    {
 
-    public LoginWnd loginWnd;
-    public CreateWnd createWnd;
-
-    public override void InitSys() {
-        base.InitSys();
-
-        Instance = this;
-        Debug.Log("Init LoginSys...");
     }
 
-    /// <summary>
-    /// 进入登录场景
-    /// </summary>
-    public void EnterLogin() {
-        //异步的加载登录场景
-        //并显示加载的进度
-        resSvc.AsyncLoadScene(Constants.SceneLogin, () => {
-            //加载完成以后再打开注册登录界面
-            loginWnd.SetWndState();
-            audioSvc.PlayBGMusic(Constants.BGLogin);
-        });
+    protected void loadLoginWindow()
+    {
+
     }
 
-    public void RspLogin() {
-        GameRoot.AddTips("登录成功");
-
-        //打开角色创建界面
-        createWnd.SetWndState();
-        //关闭登录界面
-        loginWnd.SetWndState(false);
-    }
-}
+} 
