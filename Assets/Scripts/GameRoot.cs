@@ -8,19 +8,26 @@
 
 using UnityEngine;
 
-public class GameRoot : MonoBehaviour {
-    public static GameRoot Instance = null;
+public class GameRoot : MonoBehaviour
+{
+    public static GameRoot Instance = 2222null;
 
     private void Start()
     {
+        Instance = this;
         DontDestroyOnLoad(this);
 
     }
-
+        
   protected void Init()
     {
         LoginSys login = GetComponent<LoginSys>();
 
     }
-}
+
+    public void UpdateloadingInfo(float progress, string name )
+    {
+
+    }
+
 }

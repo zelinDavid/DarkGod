@@ -15,8 +15,16 @@ using System;
 
 public class ResSvc : MonoBehaviour
 {
+    public static ResSvc Instance;
     private Action prgCB = null;
-    protected void LoadSceneAsync(string name, Action finishAction)
+
+    private void Start()
+    {
+        Instance = this;
+
+    }
+
+    public void LoadSceneAsync(string name, Action finishAction)
     {
         AsyncOperation operation = SceneManager.LoadSceneAsync(name);
         prgCB = () =>
@@ -28,14 +36,14 @@ public class ResSvc : MonoBehaviour
             }
             else
             {
-                this.UpdateLoadingProgress(progress);
+                GameRoot.Instance.UpdateloadingInfo(progress, name);
             }
         };
     }
 
     public void UpdateLoadingProgress(float progress)
     {
-
+        
     }
 
 

@@ -7,17 +7,21 @@
 *****************************************************/
 
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class LoginSys : SystemRoot {
   
     protected void Init()
     {
-
+        this.loadLoginWindow(); 
     }
 
     protected void loadLoginWindow()
     {
+        resSvc.LoadSceneAsync("SceneLogin", () => {
 
+
+        });        
     }
 
 } 
