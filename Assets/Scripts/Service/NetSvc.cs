@@ -14,6 +14,7 @@ using System.Collections.Generic;
 
 public class NetSvc : MonoBehaviour 
 {
+    
     public static NetSvc Instance;
     public PESocket<ClientSession, GameMsg> socket;
     private Queue<GameMsg> msgQueue = new Queue<GameMsg>();
@@ -26,7 +27,7 @@ public class NetSvc : MonoBehaviour
         Init();
         Instance = this;
     }
-
+ 
     private void Update()
     {
         lock (obj)
@@ -72,7 +73,7 @@ public class NetSvc : MonoBehaviour
     }
     
    private void ProcessMsg(GameMsg msg)
-    {
+    { 
         if (msg.err != (int)ErrorCode.None)
         {
             switch (msg.err)

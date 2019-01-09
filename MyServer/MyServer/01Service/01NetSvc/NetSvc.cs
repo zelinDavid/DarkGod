@@ -57,6 +57,9 @@ public class NetSvc
             case CMD.None:
 
                 break;
+            case CMD.ReqLogin:
+                
+                break;
         }
        
     }

@@ -288,12 +288,6 @@
     <Reference Include="UnityEngine.SpatialTracking">
       <HintPath>C:/Program Files/Unity/Hub/Editor/2018.3.0b11/Editor/Data/UnityExtensions/Unity/UnitySpatialTracking/RuntimeEditor/UnityEngine.SpatialTracking.dll</HintPath>
     </Reference>
-    <Reference Include="PEProtocol">
-      <HintPath>E:/BaiduNetdiskDownload/暗黑战神课程资料1-4章/第2章/工程文件/DarkGod/Assets/Scripts/Net/PEProtocol.dll</HintPath>
-    </Reference>
-    <Reference Include="PESocket">
-      <HintPath>E:/BaiduNetdiskDownload/暗黑战神课程资料1-4章/第2章/工程文件/DarkGod/Assets/Scripts/Net/PESocket.dll</HintPath>
-    </Reference>
     <Reference Include="Unity.Analytics.Editor">
       <HintPath>E:/BaiduNetdiskDownload/暗黑战神课程资料1-4章/第2章/工程文件/DarkGod/Library/PackageCache/com.unity.analytics@3.2.2/Unity.Analytics.Editor.dll</HintPath>
     </Reference>
@@ -305,6 +299,12 @@
     </Reference>
     <Reference Include="UnityEngine.Purchasing">
       <HintPath>E:/BaiduNetdiskDownload/暗黑战神课程资料1-4章/第2章/工程文件/DarkGod/Library/PackageCache/com.unity.purchasing@2.0.1/UnityEngine.Purchasing.dll</HintPath>
+    </Reference>
+    <Reference Include="PEProtocol">
+      <HintPath>E:/BaiduNetdiskDownload/暗黑战神课程资料1-4章/第2章/工程文件/DarkGod/Assets/Plugins/PEProtocol.dll</HintPath>
+    </Reference>
+    <Reference Include="PESocket">
+      <HintPath>E:/BaiduNetdiskDownload/暗黑战神课程资料1-4章/第2章/工程文件/DarkGod/Assets/Plugins/PESocket.dll</HintPath>
     </Reference>
     <Reference Include="mscorlib">
       <HintPath>C:/Program Files/Unity/Hub/Editor/2018.3.0b11/Editor/Data/MonoBleedingEdge/lib/mono/unity/mscorlib.dll</HintPath>

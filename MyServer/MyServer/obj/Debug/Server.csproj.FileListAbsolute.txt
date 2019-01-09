@@ -9,3 +9,13 @@ E:\BaiduNetdiskDownload\暗黑战神课程资料1-4章\第3章\MyServer\MyServer
 E:\BaiduNetdiskDownload\暗黑战神课程资料1-4章\第3章\MyServer\MyServer\obj\Debug\Server.csproj.CopyComplete
 E:\BaiduNetdiskDownload\暗黑战神课程资料1-4章\第3章\MyServer\MyServer\obj\Debug\MyServer.exe
 E:\BaiduNetdiskDownload\暗黑战神课程资料1-4章\第3章\MyServer\MyServer\obj\Debug\MyServer.pdb
+E:\BaiduNetdiskDownload\暗黑战神课程资料1-4章\第2章\工程文件\DarkGod\MyServer\MyServer\bin\Debug\MyServer.exe.config
+E:\BaiduNetdiskDownload\暗黑战神课程资料1-4章\第2章\工程文件\DarkGod\MyServer\MyServer\bin\Debug\MyServer.exe
+E:\BaiduNetdiskDownload\暗黑战神课程资料1-4章\第2章\工程文件\DarkGod\MyServer\MyServer\bin\Debug\MyServer.pdb
+E:\BaiduNetdiskDownload\暗黑战神课程资料1-4章\第2章\工程文件\DarkGod\MyServer\MyServer\bin\Debug\PEProtocol.dll
+E:\BaiduNetdiskDownload\暗黑战神课程资料1-4章\第2章\工程文件\DarkGod\MyServer\MyServer\bin\Debug\PEProtocol.pdb
+E:\BaiduNetdiskDownload\暗黑战神课程资料1-4章\第2章\工程文件\DarkGod\MyServer\MyServer\obj\Debug\Server.csprojAssemblyReference.cache
+E:\BaiduNetdiskDownload\暗黑战神课程资料1-4章\第2章\工程文件\DarkGod\MyServer\MyServer\obj\Debug\Server.csproj.CoreCompileInputs.cache
+E:\BaiduNetdiskDownload\暗黑战神课程资料1-4章\第2章\工程文件\DarkGod\MyServer\MyServer\obj\Debug\Server.csproj.CopyComplete
+E:\BaiduNetdiskDownload\暗黑战神课程资料1-4章\第2章\工程文件\DarkGod\MyServer\MyServer\obj\Debug\MyServer.exe
+E:\BaiduNetdiskDownload\暗黑战神课程资料1-4章\第2章\工程文件\DarkGod\MyServer\MyServer\obj\Debug\MyServer.pdb

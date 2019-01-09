@@ -38,7 +38,14 @@ namespace PEProtocol
         public const string srvIP = "127.0.0.1";
         public const int srvPort = 17666;
     }
-        
+
+    public enum ErrorCode
+    {
+        None = 0,
+        WrongPass = 101,
+        AcctIsOnline = 102,
+    }
+
 }
     
  
