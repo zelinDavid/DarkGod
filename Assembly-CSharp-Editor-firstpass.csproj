@@ -312,6 +312,12 @@
     <Reference Include="SyntaxTree.VisualStudio.Unity.Bridge">
       <HintPath>C:/Program Files (x86)/Microsoft Visual Studio Tools for Unity/15.0/Editor/SyntaxTree.VisualStudio.Unity.Bridge.dll</HintPath>
     </Reference>
+    <Reference Include="PEProtocol">
+      <HintPath>E:/BaiduNetdiskDownload/暗黑战神课程资料1-4章/第2章/工程文件/DarkGod/Assets/Scripts/Net/PEProtocol.dll</HintPath>
+    </Reference>
+    <Reference Include="PESocket">
+      <HintPath>E:/BaiduNetdiskDownload/暗黑战神课程资料1-4章/第2章/工程文件/DarkGod/Assets/Scripts/Net/PESocket.dll</HintPath>
+    </Reference>
     <Reference Include="UnityEditor.Advertisements">
       <HintPath>E:/BaiduNetdiskDownload/暗黑战神课程资料1-4章/第2章/工程文件/DarkGod/Library/PackageCache/com.unity.ads@2.0.8/Editor/UnityEditor.Advertisements.dll</HintPath>
     </Reference>
@@ -329,12 +335,6 @@
     </Reference>
     <Reference Include="UnityEditor.Purchasing">
       <HintPath>E:/BaiduNetdiskDownload/暗黑战神课程资料1-4章/第2章/工程文件/DarkGod/Library/PackageCache/com.unity.purchasing@2.0.1/Editor/UnityEditor.Purchasing.dll</HintPath>
-    </Reference>
-    <Reference Include="PESocket">
-      <HintPath>E:/BaiduNetdiskDownload/暗黑战神课程资料1-4章/第2章/工程文件/DarkGod/Assets/Scripts/Net/PESocket.dll</HintPath>
-    </Reference>
-    <Reference Include="PEProtocol">
-      <HintPath>E:/BaiduNetdiskDownload/暗黑战神课程资料1-4章/第2章/工程文件/DarkGod/Assets/Scripts/Net/PEProtocol.dll</HintPath>
     </Reference>
     <Reference Include="mscorlib">
       <HintPath>C:/Program Files/Unity/Hub/Editor/2018.3.0b11/Editor/Data/MonoBleedingEdge/lib/mono/2.0-api/mscorlib.dll</HintPath>

@@ -1,0 +1,8 @@
+E:\BaiduNetdiskDownload\暗黑战神课程资料1-4章\第3章\MyServer\PEProtocol\obj\Debug\PEProtocol.csprojAssemblyReference.cache
+E:\BaiduNetdiskDownload\暗黑战神课程资料1-4章\第3章\MyServer\PEProtocol\obj\Debug\PEProtocol.csproj.CoreCompileInputs.cache
+E:\BaiduNetdiskDownload\暗黑战神课程资料1-4章\第3章\MyServer\PEProtocol\bin\Debug\PEProtocol.dll
+E:\BaiduNetdiskDownload\暗黑战神课程资料1-4章\第3章\MyServer\PEProtocol\bin\Debug\PEProtocol.pdb
+E:\BaiduNetdiskDownload\暗黑战神课程资料1-4章\第3章\MyServer\PEProtocol\bin\Debug\PESocket.dll
+E:\BaiduNetdiskDownload\暗黑战神课程资料1-4章\第3章\MyServer\PEProtocol\obj\Debug\PEProtocol.csproj.CopyComplete
+E:\BaiduNetdiskDownload\暗黑战神课程资料1-4章\第3章\MyServer\PEProtocol\obj\Debug\PEProtocol.dll
+E:\BaiduNetdiskDownload\暗黑战神课程资料1-4章\第3章\MyServer\PEProtocol\obj\Debug\PEProtocol.pdb

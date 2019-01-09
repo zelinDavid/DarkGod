@@ -33,6 +33,7 @@ public class NetSvc : MonoBehaviour
         {
             if ( msgQueue.Count > 0)
             {
+                Debug.Log("处理消息");
                  GameMsg msg = msgQueue.Dequeue();
                 ProcessMsg(msg);
             }

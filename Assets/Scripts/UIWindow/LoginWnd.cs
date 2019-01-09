@@ -8,22 +8,26 @@
 
 using UnityEngine;
 using UnityEngine.UI;
+using PEProtocol;
 
 public class LoginWnd : WindowRoot {
-
-    private void Start()
-    {
-        
-    }
-
-    public void activeWindow(bool state = true)
-    {
-        gameObject.SetActive(state);
-    }
+    public InputField accInput;
+    public InputField passInput;
+    
 
     public void clickEnterBtn( )
     {
-       NetSvc.Instance.
+        string acc = accInput.text;
+        string pass = accInput.text;
+
+        netSvc.SendMessage(new GameMsg {
+            cmd = (int)CMD.ReqLogin,
+            reqLogin = new ReqLogin
+            {
+                acct = acc,
+                pass = pass,
+            },
+        });
     }
 
 }

@@ -3,7 +3,7 @@ using System.Collections;
 
 public class WindowRoot : MonoBehaviour
 {
-    NetSvc netSvc;   
+    protected NetSvc netSvc;   
     public virtual void SetWindowActive(bool active = true)
     {
         if (active)

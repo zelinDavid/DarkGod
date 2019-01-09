@@ -30,10 +30,11 @@ public class ResSvc : MonoBehaviour
         prgCB = () =>
         {
             float progress = operation.progress;
-            print("progress:" + progress);
+ 
             if (progress == 1.0f)
             {
                 finishAction();
+                prgCB = null; 
             }
             else
             {
@@ -45,7 +46,11 @@ public class ResSvc : MonoBehaviour
 
     private void Update()
     {
-        prgCB();
-        print("ddd");
+        if (prgCB != null)
+        {
+            prgCB();
+        }
+        
+      
     }
 }
