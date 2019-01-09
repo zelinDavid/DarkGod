@@ -35,3 +35,4 @@ sysinfo.txt
 *.unitypackage
 Logs
 Packages
+/MyServer/.vs/Server/v15/Server/sqlite3/db.lock

@@ -1,0 +1,14 @@
+{
+  "ProjectFilePath": "/Users/mac/Desktop/第3章/工程文件/DarkGod/Server/Server/Server.csproj",
+  "TargetFramework": "v4.6.1",
+  "TagHelpers": [],
+  "Configuration": {
+    "ConfigurationName": "UnsupportedRazor",
+    "LanguageVersion": "1.0",
+    "Extensions": [
+      {
+        "ExtensionName": "UnsupportedRazorExtension"
+      }
+    ]
+  }
+}

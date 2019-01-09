@@ -1,0 +1,12 @@
+/Users/mac/Desktop/第3章/工程文件/DarkGod/Server/Server/bin/Debug/Server.exe.config
+/Users/mac/Desktop/第3章/工程文件/DarkGod/Server/Server/bin/Debug/Server.exe
+/Users/mac/Desktop/第3章/工程文件/DarkGod/Server/Server/bin/Debug/Server.pdb
+/Users/mac/Desktop/第3章/工程文件/DarkGod/Server/Server/bin/Debug/PESocket.dll
+/Users/mac/Desktop/第3章/工程文件/DarkGod/Server/Server/bin/Debug/PEProtocol.pdb
+/Users/mac/Desktop/第3章/工程文件/DarkGod/Server/Server/bin/Debug/PEProtocol.dll.mdb
+/Users/mac/Desktop/第3章/工程文件/DarkGod/Server/Server/obj/Debug/Server.csprojAssemblyReference.cache
+/Users/mac/Desktop/第3章/工程文件/DarkGod/Server/Server/obj/Debug/Server.exe.config
+/Users/mac/Desktop/第3章/工程文件/DarkGod/Server/Server/obj/Debug/Server.csproj.CoreCompileInputs.cache
+/Users/mac/Desktop/第3章/工程文件/DarkGod/Server/Server/obj/Debug/Server.csproj.CopyComplete
+/Users/mac/Desktop/第3章/工程文件/DarkGod/Server/Server/obj/Debug/Server.exe
+/Users/mac/Desktop/第3章/工程文件/DarkGod/Server/Server/obj/Debug/Server.pdb
