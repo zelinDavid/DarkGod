@@ -10,17 +10,22 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class LoginSys : SystemRoot {
-  
+    public LoginWnd loginWind;
+    public override void Start()
+    {
+        base.Start();
+        this.loadLoginWindow();
+    }
     protected void Init()
     {
-        this.loadLoginWindow(); 
+        
     }
 
     protected void loadLoginWindow()
     {
+        
         resSvc.LoadSceneAsync("SceneLogin", () => {
-
-
+               loginWind.activeWindow();
         });        
     }
 

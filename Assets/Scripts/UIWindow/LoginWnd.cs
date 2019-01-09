@@ -10,5 +10,20 @@ using UnityEngine;
 using UnityEngine.UI;
 
 public class LoginWnd : WindowRoot {
-    
+
+    private void Start()
+    {
+        
+    }
+
+    public void activeWindow(bool state = true)
+    {
+        gameObject.SetActive(state);
+    }
+
+    public void clickEnterBtn( )
+    {
+       
+    }
+
 }

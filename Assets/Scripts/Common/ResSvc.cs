@@ -9,27 +9,28 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using System;
- 
- 
-
+  
 
 public class ResSvc : MonoBehaviour
 {
     public static ResSvc Instance;
-    private Action prgCB = null;
-
     private void Start()
     {
         Instance = this;
-
     }
+
+    private Action prgCB = null;
+
+    
 
     public void LoadSceneAsync(string name, Action finishAction)
     {
+       
         AsyncOperation operation = SceneManager.LoadSceneAsync(name);
         prgCB = () =>
         {
             float progress = operation.progress;
+            print("progress:" + progress);
             if (progress == 1.0f)
             {
                 finishAction();
@@ -41,15 +42,10 @@ public class ResSvc : MonoBehaviour
         };
     }
 
-    public void UpdateLoadingProgress(float progress)
-    {
-        
-    }
-
 
     private void Update()
     {
         prgCB();
-
+        print("ddd");
     }
 }

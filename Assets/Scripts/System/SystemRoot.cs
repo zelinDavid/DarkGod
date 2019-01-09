@@ -5,7 +5,7 @@ public class SystemRoot : MonoBehaviour
 {
     protected static ResSvc resSvc;
 
-    private void Start()
+    public virtual void Start()
     {
         resSvc = ResSvc.Instance;
 

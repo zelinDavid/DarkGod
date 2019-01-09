@@ -10,9 +10,9 @@ using UnityEngine;
 
 public class GameRoot : MonoBehaviour
 {
-    public static GameRoot Instance = 2222null;
+    public static GameRoot Instance = null;
 
-    private void Start()
+    public  void  Start()
     {
         Instance = this;
         DontDestroyOnLoad(this);
@@ -21,8 +21,7 @@ public class GameRoot : MonoBehaviour
         
   protected void Init()
     {
-        LoginSys login = GetComponent<LoginSys>();
-
+       
     }
 
     public void UpdateloadingInfo(float progress, string name )
