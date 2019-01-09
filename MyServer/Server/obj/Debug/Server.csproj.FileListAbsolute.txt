@@ -10,3 +10,7 @@
 /Users/mac/Desktop/第3章/工程文件/DarkGod/Server/Server/obj/Debug/Server.csproj.CopyComplete
 /Users/mac/Desktop/第3章/工程文件/DarkGod/Server/Server/obj/Debug/Server.exe
 /Users/mac/Desktop/第3章/工程文件/DarkGod/Server/Server/obj/Debug/Server.pdb
+C:\Users\Administrator\Documents\DarkGod\MyServer\Server\obj\Debug\Server.csprojAssemblyReference.cache
+C:\Users\Administrator\Documents\DarkGod\MyServer\Server\obj\Debug\Server.csproj.CoreCompileInputs.cache
+C:\Users\Administrator\Documents\DarkGod\MyServer\Server\obj\Debug\Server.exe
+C:\Users\Administrator\Documents\DarkGod\MyServer\Server\obj\Debug\Server.pdb

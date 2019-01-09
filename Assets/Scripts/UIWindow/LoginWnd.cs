@@ -20,7 +20,7 @@ public class LoginWnd : WindowRoot {
         string acc = accInput.text;
         string pass = accInput.text;
 
-        netSvc.SendMessage(new GameMsg {
+        NetSvc.Instance.SendMessage(new GameMsg {
             cmd = (int)CMD.ReqLogin,
             reqLogin = new ReqLogin
             {

@@ -11,8 +11,11 @@ using UnityEngine.SceneManagement;
 
 public class LoginSys : SystemRoot {
     public LoginWnd loginWind;
+    public CreateWindow createWind;
+    public static LoginSys Instance;
     public override void Start()
     {
+        Instance = this;
         base.Start();
         this.loadLoginWindow();
     }
@@ -27,6 +30,12 @@ public class LoginSys : SystemRoot {
         resSvc.LoadSceneAsync("SceneLogin", () => {
                loginWind.SetWindowActive();
         });        
+    }
+
+    public void LoadNameWindow()
+    {
+        loginWind.SetWindowActive(false);
+        createWind.SetWindowActive();
     }
 
 } 
