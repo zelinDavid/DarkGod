@@ -23,7 +23,7 @@ public class LoginWnd : WindowRoot {
 
     public void clickEnterBtn( )
     {
-       
+       NetSvc.Instance.
     }
 
 }

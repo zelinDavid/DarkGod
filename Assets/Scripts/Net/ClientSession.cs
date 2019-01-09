@@ -8,15 +8,29 @@
 
 using PENet;
 using PEProtocol;
+using UnityEngine;
 
- 
 
-public class ClientSession:PESession<GameMsg>
+public class ClientSession : PESession<GameMsg>
 {
-    private PESocket<ClientSession, GameMsg> socket;
-    void Init()
+  
+    protected override void OnConnected()
     {
-        socket = new PESocket<ClientSession, GameMsg>();
-        socket.StartAsClient("ip", 333);
+        Debug.LogWarning("OnConnected");
     }
+    protected override void OnDisConnected()
+    {
+        Debug.LogWarning("OnDisConnected");
+    }
+
+    protected override void OnReciveMsg(GameMsg msg)
+    {
+        Debug.LogWarning("OnReciveMsg");
+        NetSvc.Instance.AddMessageQueue(msg);
+    }
+
+
+
+
 }
+

@@ -8,8 +8,6 @@
 
 public class Constant
 {
-    public string IP = "127.0.0.1";
-
-    public string Port = 123;
+   
 }
 

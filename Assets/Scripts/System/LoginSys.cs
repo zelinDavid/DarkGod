@@ -25,7 +25,7 @@ public class LoginSys : SystemRoot {
     {
         
         resSvc.LoadSceneAsync("SceneLogin", () => {
-               loginWind.activeWindow();
+               loginWind.SetWindowActive();
         });        
     }
 
