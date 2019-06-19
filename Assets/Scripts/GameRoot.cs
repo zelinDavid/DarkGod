@@ -8,24 +8,31 @@
 
 using UnityEngine;
 
-public class GameRoot : MonoBehaviour
-{
+public class GameRoot : MonoBehaviour {
     public static GameRoot Instance = null;
 
-    public  void  Start()
-    {
+    public void Start () {
         Instance = this;
-        DontDestroyOnLoad(this);
+        DontDestroyOnLoad (this);
 
-    }
-        
-  protected void Init()
-    {
-       
+        ClearUI ();
+        Init();
     }
 
-    public void UpdateloadingInfo(float progress, string name )
-    {
+    private void ClearUI () {
+        Transform canvs = transform.Find ("Canvas");
+        for (int i = 0; i < canvs.childCount; i++) {
+            canvs.GetChild (i).gameObject.SetActive (false);
+        }
+    }
+
+    //初始化各个模块
+    protected void Init () {
+        ResSvc resSev = GetComponent<ResSvc>();
+        resSev.Init();
+    }
+
+    public void UpdateloadingInfo (float progress, string name) {
 
     }
 

@@ -19,6 +19,12 @@ public class ResSvc : MonoBehaviour
         Instance = this;
     }
 
+    public void InitService(){
+        //ToDO:你上次写到这里
+        
+    }
+
+
     private Action prgCB = null;
 
     
