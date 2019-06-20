@@ -16,15 +16,12 @@ public class DynamicWnd : WindowRoot {
     }
 
     public void AddTips(string tip) {
-        Debug.Log("addTips: " + tip);
+        // Debug.Log("addTips: " + tip);
         tipsQueue.Enqueue(tip);
-        Debug.Log("addTips111: " + tipsQueue.Count);
-
-        
     }
    
     private void Update() {
-        Debug.Log("update " + tipsQueue.Count );
+    
         if (tipsQueue.Count > 0 && !isShow) {
             lock(tipsQueue) {
                 string tip = tipsQueue.Dequeue() as string;

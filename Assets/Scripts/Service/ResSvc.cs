@@ -1,4 +1,6 @@
 using System.Collections.Generic;
+using System.IO;
+using System.Xml;
 /****************************************************
     文件：ResSvc.cs
 	作者：BearYang
@@ -51,15 +53,54 @@ public class ResSvc : MonoBehaviour {
             yield return null;
         }
         Debug.Log("coroutineLoadSync Finish");
-        
+
         operation.allowSceneActivation = true;
         GameRoot.Instance.UpdateloadingInfo(1.0f, name);
         finishAction();
     }
 
-    private void InitRDNameCfg() {
+    #region  RandomName
+    private List<string> Mans = new List<string>();
+    private List<string> Womans = new List<string>();
+    private List<string> Surnames = new List<string>();
 
+    private void InitRDNameCfg() {
+        string text = File.ReadAllText(Application.dataPath + "/Resources/" + PathDefine.RDNameCfg + ".xml");
+        // Debug.Log(text);
+        if (text.Length > 0) {
+            XmlDocument doc = new XmlDocument();
+            doc.LoadXml(text);
+
+            XmlNodeList nodList = doc.SelectSingleNode("root").ChildNodes;
+            for (int i = 0; i < nodList.Count; i++) {
+                XmlElement ele = nodList[i] as XmlElement;
+                foreach (XmlNode node in ele.ChildNodes) {
+                    switch (node.Name) {
+                        case "surname":
+                            Surnames.Add(node.InnerText);
+                            break;
+                        case "man":
+                            Mans.Add(node.InnerText);
+                            break;
+                        case "woman":
+                            Womans.Add(node.InnerText);
+                            break;
+                    }
+                }
+            }
+        }
+        // Debug.Log(Mans.Count);
     }
+
+    public System.Random Random = new System.Random();
+    public string GetRDNameData(bool man = true) {
+        int first = Random.Next(0,Surnames.Count - 1);
+        int sec = man ? Random.Next(0,Mans.Count - 1): Random.Next(0,Womans.Count - 1) ;
+        string name = Surnames[first] + (man?Mans[sec]:Womans[sec]);
+         Debug.Log("name:" + name);
+         return name;
+    }
+    #endregion
 
     private Dictionary<string, AudioClip> clipCache = new Dictionary<string, AudioClip>();
     public AudioClip LoadAudio(string path, bool isCache = true) {
