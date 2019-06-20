@@ -1,7 +1,6 @@
 /****************************************************
     文件：GameRoot.cs
-	作者：SIKI学院——Plane
-    邮箱: 1785275942@qq.com
+	
     日期：2018/12/3 5:30:21
 	功能：游戏启动入口
 *****************************************************/
@@ -36,7 +35,10 @@ public class GameRoot : MonoBehaviour {
 
         //业务系统初始化
         LoginSys login = GetComponent<LoginSys>();
+        login.InitSystem();
 
+        
+        login.EnterLogin();
     }
 
     public void UpdateloadingInfo (float progress, string name) {

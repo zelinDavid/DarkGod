@@ -94,7 +94,7 @@ public class NetSvc : MonoBehaviour
         if ((CMD)msg.cmd == CMD.RspLogin)
         {
             //Debug.Log("登录成功");
-            LoginSys.Instance.LoadNameWindow();
+            // LoginSys.Instance.LoadNameWindow();
         }
 
 

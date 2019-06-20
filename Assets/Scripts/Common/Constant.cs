@@ -8,6 +8,7 @@
 
 public class Constant
 {
-   
+      //音效名称
+    public const string BGLogin = "bgLogin";
 }
 

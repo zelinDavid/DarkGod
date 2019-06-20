@@ -9,63 +9,67 @@ using System.Collections.Generic;
 
 using System;
 using System.Collections;
+
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class ResSvc : MonoBehaviour {
     public static ResSvc Instance;
 
-    public void InitService () {
+    public void InitService() {
         Instance = this;
 
-        InitRDNameCfg (); //TODO;
-        Debug.Log ("Init Service...");
+        InitRDNameCfg(); //TODO;
+        Debug.Log("Init Service...");
 
     }
 
     private Action prgCB = null;
 
-    public void LoadSceneAsync (string name, Action finishAction) {
-        StartCoroutine (coroutineLoadSync (name, finishAction));
+    public void AsyncLoadScene(string name, Action finishAction) {
+        StartCoroutine(coroutineLoadSync(name, finishAction));
 
     }
-    private IEnumerator coroutineLoadSync (string name, Action finishAction) {
-        AsyncOperation operation = SceneManager.LoadSceneAsync (name);
+    private IEnumerator coroutineLoadSync(string name, Action finishAction) {
+        AsyncOperation operation = SceneManager.LoadSceneAsync(name);
         operation.allowSceneActivation = false;
 
         float progress;
         float currentProgress = 0;
-        while (operation.progress < 0.9) {
+        while (operation.progress < 0.9f) {
             progress = operation.progress;
             while (currentProgress < progress) {
-                currentProgress++;
-                GameRoot.Instance.UpdateloadingInfo (currentProgress, name);
+                currentProgress += 0.01f;
+                GameRoot.Instance.UpdateloadingInfo(currentProgress, name);
                 yield return null;
             }
         }
-        progress = 1.0f;
+        progress = 0.98f;
         while (currentProgress < progress) {
-            currentProgress++;
-            GameRoot.Instance.UpdateloadingInfo (currentProgress, name);
+            currentProgress += 0.01f;
+            GameRoot.Instance.UpdateloadingInfo(currentProgress, name);
             yield return null;
         }
-        GameRoot.Instance.UpdateloadingInfo (1.0f, name);
-        finishAction ();
+        Debug.Log("coroutineLoadSync Finish");
+        
+        operation.allowSceneActivation = true;
+        GameRoot.Instance.UpdateloadingInfo(1.0f, name);
+        finishAction();
     }
 
-    private void InitRDNameCfg () {
+    private void InitRDNameCfg() {
 
     }
 
-    private Dictionary<string, AudioClip> clipCache = new Dictionary<string, AudioClip> ();
-    public AudioClip LoadAudio (string path, bool isCache = true) {
-        if (clipCache.TryGetValue (path, out AudioClip clip)) {
+    private Dictionary<string, AudioClip> clipCache = new Dictionary<string, AudioClip>();
+    public AudioClip LoadAudio(string path, bool isCache = true) {
+        if (clipCache.TryGetValue(path, out AudioClip clip)) {
             return clip;
         }
 
-        clip = Resources.Load<AudioClip> (path);
+        clip = Resources.Load<AudioClip>(path);
         if (isCache) {
-            clipCache.Add (path, clip);
+            clipCache.Add(path, clip);
         }
         return clip;
     }
