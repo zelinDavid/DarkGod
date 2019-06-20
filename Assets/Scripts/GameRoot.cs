@@ -5,28 +5,37 @@
 	功能：游戏启动入口
 *****************************************************/
 
+using PEProtocol;
+
 using UnityEngine;
 
 public class GameRoot : MonoBehaviour {
     public static GameRoot Instance = null;
+    private DynamicWnd dynamicWnd;
 
-    public void Start () {
+    public void Start() {
         Instance = this;
-        DontDestroyOnLoad (this);
+        DontDestroyOnLoad(this);
 
-        ClearUI ();
+        ClearUI();
         Init();
+        initData();
     }
 
-    private void ClearUI () {
-        Transform canvs = transform.Find ("Canvas");
+    private void initData() {
+        dynamicWnd = transform.Find("Canvas/DynamicWnd").GetComponent<DynamicWnd>();
+        dynamicWnd.SetWndState();
+    }
+
+    private void ClearUI() {
+        Transform canvs = transform.Find("Canvas");
         for (int i = 0; i < canvs.childCount; i++) {
-            canvs.GetChild (i).gameObject.SetActive (false);
+            canvs.GetChild(i).gameObject.SetActive(false);
         }
     }
 
     //初始化各个模块
-    protected void Init () {
+    protected void Init() {
         ResSvc resSev = GetComponent<ResSvc>();
         resSev.InitService();
 
@@ -37,12 +46,20 @@ public class GameRoot : MonoBehaviour {
         LoginSys login = GetComponent<LoginSys>();
         login.InitSystem();
 
-        
         login.EnterLogin();
     }
 
-    public void UpdateloadingInfo (float progress, string name) {
+    public void UpdateloadingInfo(float progress, string name) {
 
     }
 
+    private PlayerData playerData;
+    public void SetPlayerData(GameMsg msg) {
+        this.playerData = msg.rspLogin.playerData;
+    }
+
+    public void AddTips(string tip) {
+        // Debug.Log("dynamicWnd" + this.dynamicWnd);
+        this.dynamicWnd.AddTips(tip);
+    }
 }

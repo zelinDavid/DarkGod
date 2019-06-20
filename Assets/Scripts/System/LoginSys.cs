@@ -5,6 +5,7 @@
 	功能：登录注册业务系统
 *****************************************************/
 
+using PEProtocol;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -22,14 +23,25 @@ public class LoginSys : SystemRoot {
 
     public void EnterLogin() {
         resSvc.AsyncLoadScene("SceneLogin", () => {
-            loginWind.SetWindowActive();
+            loginWind.SetWndState();
             AudioSvc.Instance.PlayBgAudio(Constant.BGLogin);
         });
     }
 
-    // public void RspLogin(string name) {
-    //     loginWind.SetWindowActive(false);
-    //     createWind.SetWindowActive();
-    // }
+    public void RspLogin(GameMsg msg) {
+        GameRoot.Instance.AddTips("登录成功");
+        GameRoot.Instance.SetPlayerData(msg);
+ 
+        if (msg.rspLogin.playerData == null || msg.rspLogin.playerData.name == "")
+        {
+            //开始生成
+            createWind.SetWndState(true);  
+        }else {
+            //进入主程TODO
+        }
+        Debug.Log(msg.rspLogin.playerData);
 
+        loginWind.SetWndState(false);
+    }
+ 
 }

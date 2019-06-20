@@ -62,6 +62,7 @@
      <Compile Include="Assets\Scripts\System\LoginSys.cs" />
      <Compile Include="Assets\Scripts\System\SystemRoot.cs" />
      <Compile Include="Assets\Scripts\UIWindow\CreateWindow.cs" />
+     <Compile Include="Assets\Scripts\UIWindow\DynamicWnd.cs" />
      <Compile Include="Assets\Scripts\UIWindow\LoginWnd.cs" />
      <Compile Include="Assets\Scripts\UIWindow\WindowRoot.cs" />
      <None Include="Assets\Resources\ResCfgs\rdname.xml" />

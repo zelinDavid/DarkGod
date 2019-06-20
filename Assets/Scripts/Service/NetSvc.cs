@@ -75,6 +75,7 @@ public class NetSvc : MonoBehaviour
     
    private void ProcessMsg(GameMsg msg)
     { 
+        Debug.Log("ProcessMsg:" +  Enum.GetName(typeof(CMD), msg.cmd)  + " " + Enum.GetName(typeof(ErrorCode), msg.err) );
         if (msg.err != (int)ErrorCode.None)
         {
             switch (msg.err)
@@ -93,12 +94,10 @@ public class NetSvc : MonoBehaviour
 
         if ((CMD)msg.cmd == CMD.RspLogin)
         {
-            //Debug.Log("登录成功");
-            // LoginSys.Instance.LoadNameWindow();
+            Debug.Log("登录成功");
+            LoginSys.Instance.RspLogin(msg);
         }
-
-
-
+ 
     }
    
     public void AddMessageQueue(GameMsg msg)
