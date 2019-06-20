@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 /****************************************************
     文件：ResSvc.cs
 	作者：BearYang
@@ -6,57 +7,67 @@
 	功能：Nothing
 *****************************************************/
 
+using System;
+using System.Collections;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-using System;
-  
 
-public class ResSvc : MonoBehaviour
-{
+public class ResSvc : MonoBehaviour {
     public static ResSvc Instance;
-    private void Start()
-    {
+
+    public void InitService () {
         Instance = this;
-    }
 
-    public void InitService(){
-        //ToDO:你上次写到这里
-        
-    }
+        InitRDNameCfg (); //TODO;
+        Debug.Log ("Init Service...");
 
+    }
 
     private Action prgCB = null;
 
-    
+    public void LoadSceneAsync (string name, Action finishAction) {
+        StartCoroutine (coroutineLoadSync (name, finishAction));
 
-    public void LoadSceneAsync(string name, Action finishAction)
-    {
-       
-        AsyncOperation operation = SceneManager.LoadSceneAsync(name);
-        prgCB = () =>
-        {
-            float progress = operation.progress;
- 
-            if (progress == 1.0f)
-            {
-                finishAction();
-                prgCB = null; 
-            }
-            else
-            {
-                GameRoot.Instance.UpdateloadingInfo(progress, name);
-            }
-        };
     }
+    private IEnumerator coroutineLoadSync (string name, Action finishAction) {
+        AsyncOperation operation = SceneManager.LoadSceneAsync (name);
+        operation.allowSceneActivation = false;
 
-
-    private void Update()
-    {
-        if (prgCB != null)
-        {
-            prgCB();
+        float progress;
+        float currentProgress = 0;
+        while (operation.progress < 0.9) {
+            progress = operation.progress;
+            while (currentProgress < progress) {
+                currentProgress++;
+                GameRoot.Instance.UpdateloadingInfo (currentProgress, name);
+                yield return null;
+            }
         }
-        
-      
+        progress = 1.0f;
+        while (currentProgress < progress) {
+            currentProgress++;
+            GameRoot.Instance.UpdateloadingInfo (currentProgress, name);
+            yield return null;
+        }
+        GameRoot.Instance.UpdateloadingInfo (1.0f, name);
+        finishAction ();
     }
+
+    private void InitRDNameCfg () {
+
+    }
+
+    private Dictionary<string, AudioClip> clipCache = new Dictionary<string, AudioClip> ();
+    public AudioClip LoadAudio (string path, bool isCache = true) {
+        if (clipCache.TryGetValue (path, out AudioClip clip)) {
+            return clip;
+        }
+
+        clip = Resources.Load<AudioClip> (path);
+        if (isCache) {
+            clipCache.Add (path, clip);
+        }
+        return clip;
+    }
+
 }
