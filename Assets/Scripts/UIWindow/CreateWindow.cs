@@ -4,6 +4,7 @@ using System.Collections.Generic;
 
 using UnityEngine;
 using UnityEngine.UI;
+using PEProtocol;
 
 public class CreateWindow : WindowRoot {
     public InputField nameField;
@@ -26,8 +27,14 @@ public class CreateWindow : WindowRoot {
         audioSvc.PlayUIAudio(Constant.BGLogin);
         if (nameField.text != "")
         {
-            //TODO
-            //发送名字到服务器
+            GameMsg msg = new GameMsg{
+                cmd = (int)CMD.ReqRename,
+                reqRename = new ReqRename{
+                    name = nameField.text,
+                }
+            };
+            netSvc.SendMessage(msg);
+
         }else{
             GameRoot.Instance.AddTips("当前名字不符合规范");
         }

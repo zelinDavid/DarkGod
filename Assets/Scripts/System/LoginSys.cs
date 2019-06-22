@@ -13,35 +13,42 @@ public class LoginSys : SystemRoot {
     public LoginWnd loginWind;
     public CreateWindow createWind;
     public static LoginSys Instance;
-    public override void InitSystem() {
-        base.InitSystem();
+    public override void InitSystem () {
+        base.InitSystem ();
 
         Instance = this;
 
-        Debug.Log("init loginSys");
+        Debug.Log ("init loginSys");
     }
 
-    public void EnterLogin() {
-        resSvc.AsyncLoadScene("SceneLogin", () => {
-            loginWind.SetWndState();
-            AudioSvc.Instance.PlayBgAudio(Constant.BGLogin);
+    public void EnterLogin () {
+        resSvc.AsyncLoadScene ("SceneLogin", () => {
+            loginWind.SetWndState ();
+            AudioSvc.Instance.PlayBgAudio (Constant.BGLogin);
         });
     }
 
-    public void RspLogin(GameMsg msg) {
-        GameRoot.Instance.AddTips("登录成功");
-        GameRoot.Instance.SetPlayerData(msg);
- 
-        if (msg.rspLogin.playerData == null || msg.rspLogin.playerData.name == "")
-        {
-            //开始生成
-            createWind.SetWndState(true);  
-        }else {
-            //进入主程TODO
-        }
-        Debug.Log(msg.rspLogin.playerData);
+    public void RspLogin (GameMsg msg) {
+        GameRoot.Instance.AddTips ("登录成功");
+        GameRoot.Instance.SetPlayerData (msg);
 
-        loginWind.SetWndState(false);
+        if (msg.rspLogin.playerData == null || msg.rspLogin.playerData.name == "") {
+            //开始生成
+            createWind.SetWndState (true);
+        } else {
+            //进入场景TODO
+        }
+        Debug.Log (msg.rspLogin.playerData);
+
+        loginWind.SetWndState (false);
     }
- 
+
+    public void RspRename (GameMsg msg) {
+        GameRoot.Instance.SetPlayerName (msg.rspRename.name);
+        //todo:进入主场景
+
+        // createWind.SetWndState (false);
+        
+    }
+
 }

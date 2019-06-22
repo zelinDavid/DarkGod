@@ -62,4 +62,13 @@ public class GameRoot : MonoBehaviour {
         // Debug.Log("dynamicWnd" + this.dynamicWnd);
         this.dynamicWnd.AddTips(tip);
     }
+
+    public void SetPlayerName(string name){
+        if (this.playerData == null)
+        {
+            Debug.LogError("SetPlayerName playerData 为null");
+            return ;
+        }
+        this.playerData.name = name;
+    }
 }
