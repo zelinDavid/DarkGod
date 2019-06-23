@@ -35,6 +35,8 @@ public class ResSvc : MonoBehaviour {
     private IEnumerator coroutineLoadSync(string name, Action finishAction) {
         AsyncOperation operation = SceneManager.LoadSceneAsync(name);
         operation.allowSceneActivation = false;
+        GameRoot.Instance.loadingWnd.SetWndState(true);
+        GameRoot.Instance.loadingWnd.SetProgress(0f);
 
         float progress;
         float currentProgress = 0;
@@ -42,20 +44,23 @@ public class ResSvc : MonoBehaviour {
             progress = operation.progress;
             while (currentProgress < progress) {
                 currentProgress += 0.01f;
-                GameRoot.Instance.UpdateloadingInfo(currentProgress, name);
+                 GameRoot.Instance.loadingWnd.SetProgress(currentProgress);
                 yield return null;
             }
         }
         progress = 0.98f;
         while (currentProgress < progress) {
             currentProgress += 0.01f;
-            GameRoot.Instance.UpdateloadingInfo(currentProgress, name);
+            GameRoot.Instance.loadingWnd.SetProgress(currentProgress);
+
             yield return null;
         }
         Debug.Log("coroutineLoadSync Finish");
 
         operation.allowSceneActivation = true;
-        GameRoot.Instance.UpdateloadingInfo(1.0f, name);
+        GameRoot.Instance.loadingWnd.SetProgress(1f);
+        GameRoot.Instance.loadingWnd.SetWndState(false);
+
         finishAction();
     }
 

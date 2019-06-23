@@ -11,6 +11,8 @@ public class WindowRoot : MonoBehaviour {
     public void SetWndState(bool isActive = true) {
         if (isActive) {
             gameObject.SetActive(true);
+        }else {
+            gameObject.SetActive(false);
         }
         if (isActive) {
             InitWnd();
@@ -26,7 +28,7 @@ public class WindowRoot : MonoBehaviour {
     }
 
     protected virtual void ClearWnd() {
-
+        
     }
 
     #region Tool Functions

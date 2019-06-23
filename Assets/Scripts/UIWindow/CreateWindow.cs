@@ -1,4 +1,5 @@
  
+using System;
 using System.Collections;
 using System.Collections.Generic;
 
@@ -40,6 +41,11 @@ public class CreateWindow : WindowRoot {
         }
 
 
+    }
+  
+
+    protected override void ClearWnd() {
+        this.gameObject.SetActive(false);
     }
 
 }

@@ -12,6 +12,8 @@ using UnityEngine;
 public class GameRoot : MonoBehaviour {
     public static GameRoot Instance = null;
     private DynamicWnd dynamicWnd;
+    public LoadingWnd loadingWnd;
+
 
     public void Start() {
         Instance = this;
@@ -46,17 +48,19 @@ public class GameRoot : MonoBehaviour {
         LoginSys login = GetComponent<LoginSys>();
         login.InitSystem();
 
+        //主场景
+        MainCitySys main = GetComponent<MainCitySys>();
+        main.InitSystem();
+
         login.EnterLogin();
     }
-
-    public void UpdateloadingInfo(float progress, string name) {
-
-    }
-
+ 
     private PlayerData playerData;
     public void SetPlayerData(GameMsg msg) {
         this.playerData = msg.rspLogin.playerData;
     }
+
+
 
     public void AddTips(string tip) {
         // Debug.Log("dynamicWnd" + this.dynamicWnd);
