@@ -21,7 +21,6 @@ public class LoadingWnd : WindowRoot {
         SetText (txtTips, "这是一条游戏tips");
         SetText (txtPrg, "0%");
         imgFG.fillAmount = 0;
-        // imgPoint.transform.localPosition = new Vector2 (0, 0);
         imgPoint.rectTransform.anchoredPosition = new Vector2(0, 0);
     }
 
@@ -31,8 +30,5 @@ public class LoadingWnd : WindowRoot {
 
         float posX = (prg) * fgWidth;
         imgPoint.rectTransform.anchoredPosition = new Vector2(posX, 0);
-
-        // imgPoint.transform.localPosition = new Vector2 (posX, 0);
-
     }
 }

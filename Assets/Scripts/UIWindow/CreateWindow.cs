@@ -35,9 +35,8 @@ public class CreateWindow : WindowRoot {
                 }
             };
             netSvc.SendMessage(msg);
-
         }else{
-            GameRoot.Instance.AddTips("当前名字不符合规范");
+            GameRoot.Instance.AddTips("输入姓名不能为空");
         }
 
 
