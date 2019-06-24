@@ -8,16 +8,31 @@
 
 public class Constant
 {
-    //场景名称
+    
+    //场景名称/ID
     public const string SceneLogin = "SceneLogin";
+    public const int MainCityMapID = 10000;
+    //public const string SceneMainCity = "SceneMainCity";
+
 
     //音效名称
     public const string BGLogin = "bgLogin";
+    public const string BGMainCity = "bgMainCity";
+    public const string BGHuangYe = "bgHuangYe";
+    public const string AssassinHit = "assassin_Hit";
+
 
     //登录按钮音效
     public const string UILoginBtn = "uiLoginBtn";
 
     //常规UI点击音效
     public const string UIClickBtn = "uiClickBtn";
+    public const string UIExtenBtn = "uiExtenBtn";
+    public const string UIOpenPage = "uiOpenPage";
+    public const string FBItemEnter = "fbitem";
+
+    public const string FBLose = "fblose";
+    public const string FBLogoEnter = "fbwin";
+
 }
 

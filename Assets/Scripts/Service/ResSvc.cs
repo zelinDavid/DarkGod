@@ -60,7 +60,7 @@ public class ResSvc : MonoBehaviour {
         operation.allowSceneActivation = true;
         GameRoot.Instance.loadingWnd.SetProgress(1f);
         GameRoot.Instance.loadingWnd.SetWndState(false);
-
+        
         finishAction();
     }
 
@@ -118,6 +118,25 @@ public class ResSvc : MonoBehaviour {
             clipCache.Add(path, clip);
         }
         return clip;
+    }
+
+    private Dictionary<string,GameObject> PrefabCache = new Dictionary<string, GameObject>();
+    public GameObject LoadPrefab(string prefabStr,bool needCache = true){
+        PrefabCache.TryGetValue(prefabStr, out GameObject prefab);
+        if (prefab != null)
+        {
+            return prefab;
+        }
+        
+        prefab = Resources.Load<GameObject>(prefabStr);
+        if (needCache)
+        {
+        
+            PrefabCache.Add(prefabStr, prefab);
+        }
+         GameObject go = Instantiate(prefab);
+        Debug.Log("prefabbb +" + go);
+        return go;
     }
 
 }

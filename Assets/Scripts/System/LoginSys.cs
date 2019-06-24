@@ -6,6 +6,7 @@
 *****************************************************/
 
 using PEProtocol;
+
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -22,6 +23,7 @@ public class LoginSys : SystemRoot {
     }
 
     public void EnterLogin() {
+        audioSvc.PlayUIAudio(Constant.UIClickBtn);
         resSvc.AsyncLoadScene("SceneLogin", () => {
             loginWind.SetWndState();
             AudioSvc.Instance.PlayBgAudio(Constant.BGLogin);
@@ -36,7 +38,8 @@ public class LoginSys : SystemRoot {
             //开始生成
             createWind.SetWndState(true);
         } else {
-            //进入场景TODO
+            //todo:进入主场景
+            MainCitySys.Instance.EnterMainCity();
         }
         Debug.Log(msg.rspLogin.playerData);
 
@@ -48,7 +51,7 @@ public class LoginSys : SystemRoot {
         //todo:进入主场景
         MainCitySys.Instance.EnterMainCity();
         createWind.SetWndState(false);
-    
+
     }
 
 }

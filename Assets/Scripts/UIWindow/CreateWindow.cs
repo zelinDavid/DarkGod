@@ -25,7 +25,7 @@ public class CreateWindow : WindowRoot {
     }
 
     public void ClickEnterBtn() {
-        audioSvc.PlayUIAudio(Constant.BGLogin);
+        audioSvc.PlayUIAudio(Constant.UIClickBtn);
         if (nameField.text != "")
         {
             GameMsg msg = new GameMsg{
