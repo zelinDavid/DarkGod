@@ -67,14 +67,14 @@
  <Reference Include="Unity.CollabProxy.Editor">
  <HintPath>D:/unity/DarkGod/Library/ScriptAssemblies/Unity.CollabProxy.Editor.dll</HintPath>
  </Reference>
- <Reference Include="Unity.TextMeshPro">
- <HintPath>D:/unity/DarkGod/Library/ScriptAssemblies/Unity.TextMeshPro.dll</HintPath>
- </Reference>
  <Reference Include="UnityEditor.SpatialTracking">
  <HintPath>D:/unity/DarkGod/Library/ScriptAssemblies/UnityEditor.SpatialTracking.dll</HintPath>
  </Reference>
  <Reference Include="UnityEngine.SpatialTracking">
  <HintPath>D:/unity/DarkGod/Library/ScriptAssemblies/UnityEngine.SpatialTracking.dll</HintPath>
+ </Reference>
+ <Reference Include="Unity.TextMeshPro">
+ <HintPath>D:/unity/DarkGod/Library/ScriptAssemblies/Unity.TextMeshPro.dll</HintPath>
  </Reference>
  <Reference Include="UnityEngine.AIModule">
  <HintPath>C:/Program Files/Unity 2019.1.0a8/Editor/Data/Managed/UnityEngine/UnityEngine.AIModule.dll</HintPath>

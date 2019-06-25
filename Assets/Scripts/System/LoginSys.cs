@@ -36,6 +36,10 @@ public class LoginSys : SystemRoot {
 
         if (msg.rspLogin.playerData == null || msg.rspLogin.playerData.name == "") {
             //开始生成
+            Debug.Log("msg.rspLogin.playerData.name");
+            Debug.Log(msg.rspLogin.playerData.name );
+            Debug.Log(msg.rspLogin.playerData);
+
             createWind.SetWndState(true);
         } else {
             //todo:进入主场景

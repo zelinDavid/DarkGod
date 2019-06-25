@@ -34,5 +34,15 @@ public class Constant
     public const string FBLose = "fblose";
     public const string FBLogoEnter = "fbwin";
 
+
+
+
+
+    //屏幕标准宽高
+    public const int ScreenStandardWidth = 1334;
+    public const int ScreenStandardHeight = 750;
+    //摇杆点标准距离
+    public const int ScreenOPDis = 90;
+    
 }
 

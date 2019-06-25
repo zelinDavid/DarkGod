@@ -55,7 +55,7 @@ public class GameRoot : MonoBehaviour {
         login.EnterLogin();
     }
  
-    private PlayerData playerData;
+    public PlayerData playerData;
     public void SetPlayerData(GameMsg msg) {
         this.playerData = msg.rspLogin.playerData;
     }

@@ -48,6 +48,7 @@ public class ResSvc : MonoBehaviour {
                 yield return null;
             }
         }
+        operation.allowSceneActivation = true;
         progress = 0.98f;
         while (currentProgress < progress) {
             currentProgress += 0.01f;
@@ -57,10 +58,13 @@ public class ResSvc : MonoBehaviour {
         }
         Debug.Log("coroutineLoadSync Finish");
 
-        operation.allowSceneActivation = true;
+        while (operation.isDone == false)
+        {
+            yield return null;
+        }
         GameRoot.Instance.loadingWnd.SetProgress(1f);
         GameRoot.Instance.loadingWnd.SetWndState(false);
-        
+
         finishAction();
     }
 

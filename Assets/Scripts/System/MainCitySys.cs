@@ -36,7 +36,7 @@ public class MainCitySys : SystemRoot {
 
             LoadPlayer();
             InitCamera();
-
+            
             //TODO: 展示人物的摄像机激活状态设置为false
 
         });
