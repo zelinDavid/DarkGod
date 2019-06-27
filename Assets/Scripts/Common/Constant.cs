@@ -43,6 +43,24 @@ public class Constant
     public const int ScreenStandardHeight = 750;
     //摇杆点标准距离
     public const int ScreenOPDis = 90;
+
+
     
+    //角色移动速度
+    public const int PlayerMoveSpeed = 8;
+    public const int MonsterMoveSpeed = 3;
+
+    //混合参数
+    public const int BlendIdle = 0;
+    public const int BlendMove = 1;
+
+    
+    //运动平滑加速度
+    public const float AccelerSpeed = 5;
+    public static float AccelerHPSpeed = 0.3F;
+
+    //普攻连招有效间隔
+    public static int ComboSpace = 500;
+
 }
 

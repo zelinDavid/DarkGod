@@ -52,15 +52,15 @@ public class MainCityWnd : WindowRoot {
         TODO: 设置任务图标更新
          */
 
-        // PlayerData pd = GameRoot.Instance.playerData;
-        // SetText(txtFight, PECommon.GetFightByProps(pd));
-        // SetText(txtPower, "体力:" + pd.power + "/" + PECommon.GetPowerLimit(pd.lv));
-        // imgPowerPrg.fillAmount = pd.power * 1.0f / PECommon.GetPowerLimit(pd.lv);
-        // SetText(txtLevel, pd.lv);
-        // SetText(txtName, pd.name);
-
+        PlayerData pd = GameRoot.Instance.playerData;
+        SetText(txtFight, PECommon.GetFightByProps(pd));
+        SetText(txtPower, "体力:" + pd.power + "/" + PECommon.GetPowerLimit(pd.lv));
+        imgPowerPrg.fillAmount = pd.power * 1.0f / PECommon.GetPowerLimit(pd.lv);
+        SetText(txtLevel, pd.lv);
+        SetText(txtName, pd.name);
+     
     }
-
+  
     private void RegisterTouchEvents() {
         OnClickDown(imgTouch.gameObject, (PointerEventData evt) => {
             startPos = evt.position;
@@ -68,10 +68,28 @@ public class MainCityWnd : WindowRoot {
             imgDirBg.transform.position = evt.position;
 
         });
-        OnDrag(imgTouch.gameObject, (PointerEventData data) => {
+        OnDrag(imgTouch.gameObject, (PointerEventData evt) => {
             //TODO:你上次写到这里
+            Vector3 destination = evt.position;
+            float dis = (destination - startPos).magnitude;
+            Vector3 dirction = (destination - startPos);
+             if (dis > pointDis)
+             {
+                 Vector3 tem = Vector3.ClampMagnitude(dirction, pointDis);
+                 imgDirPoint.transform.position = tem + startPos;
+
+             }else {
+                 imgDirPoint.transform.position = destination ; 
+             }
+            //  Debug.Log("OnDrag dirction:" + dirction);
+            MainCitySys.Instance.SetMoveDir(dirction.normalized);
         });
-        OnClickUp(imgTouch.gameObject, (PointerEventData data) => {
+        OnClickUp(imgTouch.gameObject, (PointerEventData evt) => {
+            imgDirBg.transform.position = defaulPos;
+            SetActive(imgDirPoint,false);
+            imgDirPoint.transform.localPosition = Vector3.zero;
+            MainCitySys.Instance.SetMoveDir(Vector2.zero);
+        // Debug.Log("OnClickUp dirction:");
 
         });
     }

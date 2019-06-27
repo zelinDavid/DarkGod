@@ -139,7 +139,7 @@ public class ResSvc : MonoBehaviour {
             PrefabCache.Add(prefabStr, prefab);
         }
          GameObject go = Instantiate(prefab);
-        Debug.Log("prefabbb +" + go);
+        // Debug.Log("prefabbb +" + go);
         return go;
     }
 
