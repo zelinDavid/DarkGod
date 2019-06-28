@@ -26,6 +26,7 @@ public class MainCityWnd : WindowRoot {
     public Text txtExpPrg;
 
     private Vector3 startPos;
+    private bool menuState = true;
 
     protected override void InitWnd() {
         /*
@@ -61,6 +62,22 @@ public class MainCityWnd : WindowRoot {
      
     }
   
+    public void ClickMenuBtn(){
+        audioSvc.PlayUIAudio(Constant.UIExtenBtn);
+        menuState = !menuState;
+
+        if (menuState)
+        {  
+            // AnimationClip clip = menuAni.GetClip
+        }else{ //false, 关闭动画
+
+        }
+
+        string name = menuState ? "OpenMenu" : "CloseMenu";
+        menuAni.Play(name);
+
+    }
+
     private void RegisterTouchEvents() {
         OnClickDown(imgTouch.gameObject, (PointerEventData evt) => {
             startPos = evt.position;

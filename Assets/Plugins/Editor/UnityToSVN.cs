@@ -30,7 +30,10 @@ public class UnityToSVN {
             SVNCommitAll();
         }
     }
-
+     [MenuItem("Test/InitMapCfg")]
+    public static void InitMapCfg(string path) {
+    }
+    
     [MenuItem(Menu_Commit_All)]
     public static void SVNCommitAll() {
         string path = Application.dataPath;

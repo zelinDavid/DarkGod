@@ -1,3 +1,9 @@
+using UnityEngine;
+
+#if UnityEditor
+    using UnityEditor;
+#endif
+
 using System.Collections.Generic;
 using System.IO;
 using System.Xml;
@@ -44,7 +50,7 @@ public class ResSvc : MonoBehaviour {
             progress = operation.progress;
             while (currentProgress < progress) {
                 currentProgress += 0.01f;
-                 GameRoot.Instance.loadingWnd.SetProgress(currentProgress);
+                GameRoot.Instance.loadingWnd.SetProgress(currentProgress);
                 yield return null;
             }
         }
@@ -58,8 +64,7 @@ public class ResSvc : MonoBehaviour {
         }
         Debug.Log("coroutineLoadSync Finish");
 
-        while (operation.isDone == false)
-        {
+        while (operation.isDone == false) {
             yield return null;
         }
         GameRoot.Instance.loadingWnd.SetProgress(1f);
@@ -103,11 +108,11 @@ public class ResSvc : MonoBehaviour {
 
     public System.Random Random = new System.Random();
     public string GetRDNameData(bool man = true) {
-        int first = Random.Next(0,Surnames.Count - 1);
-        int sec = man ? Random.Next(0,Mans.Count - 1): Random.Next(0,Womans.Count - 1) ;
-        string name = Surnames[first] + (man?Mans[sec]:Womans[sec]);
-         Debug.Log("name:" + name);
-         return name;
+        int first = Random.Next(0, Surnames.Count - 1);
+        int sec = man ? Random.Next(0, Mans.Count - 1) : Random.Next(0, Womans.Count - 1);
+        string name = Surnames[first] + (man?Mans[sec] : Womans[sec]);
+        Debug.Log("name:" + name);
+        return name;
     }
     #endregion
 
@@ -124,23 +129,140 @@ public class ResSvc : MonoBehaviour {
         return clip;
     }
 
-    private Dictionary<string,GameObject> PrefabCache = new Dictionary<string, GameObject>();
-    public GameObject LoadPrefab(string prefabStr,bool needCache = true){
+    private Dictionary<string, GameObject> PrefabCache = new Dictionary<string, GameObject>();
+    public GameObject LoadPrefab(string prefabStr, bool needCache = true) {
         PrefabCache.TryGetValue(prefabStr, out GameObject prefab);
-        if (prefab != null)
-        {
+        if (prefab != null) {
             return prefab;
         }
-        
+
         prefab = Resources.Load<GameObject>(prefabStr);
-        if (needCache)
-        {
-        
+        if (needCache) {
+
             PrefabCache.Add(prefabStr, prefab);
         }
-         GameObject go = Instantiate(prefab);
+        GameObject go = Instantiate(prefab);
         // Debug.Log("prefabbb +" + go);
         return go;
     }
 
+    #region 地图信息
+    private Dictionary<int, MapCfg> mapCfgDataDic = new Dictionary<int, MapCfg>();
+ 
+    public  void InitMapCfg(string path) {
+        Dictionary<int, MapCfg> mapCfgDataDic = new Dictionary<int, MapCfg>();
+        TextAsset ta = Resources.Load<TextAsset>(path);
+        string content = ta.text;
+        if (content == null || content.Length == 0) {
+            Debug.LogError("未获取到文件");
+        } else {
+            XmlDocument document = new XmlDocument();
+            document.LoadXml(content);
+
+            XmlNode root = document.SelectSingleNode("root");
+            foreach (XmlElement ele in root) {
+                if (ele.GetAttributeNode("ID") == null) {
+                    continue;
+                }
+
+                int id = int.Parse(ele.GetAttribute("ID"));
+
+                MapCfg mc = new MapCfg {
+                    ID = id,
+                    monsterLst = new List<MonsterData>()
+                };
+
+                foreach (XmlNode e in ele.ChildNodes) {
+                    switch (e.Name) {
+                        case "mapName":
+                            mc.mapName = e.InnerText;
+                            break;
+                        case "sceneName":
+                            mc.sceneName = e.InnerText;
+                            break;
+                        case "power":
+                            mc.power = int.Parse(e.InnerText);
+                            break;
+                        case "mainCamPos":
+                            {
+                                string[] valArr = e.InnerText.Split(',');
+                                mc.mainCamPos = new Vector3(float.Parse(valArr[0]), float.Parse(valArr[1]), float.Parse(valArr[2]));
+                            }
+                            break;
+                        case "mainCamRote":
+                            {
+                                string[] valArr = e.InnerText.Split(',');
+                                mc.mainCamRote = new Vector3(float.Parse(valArr[0]), float.Parse(valArr[1]), float.Parse(valArr[2]));
+                            }
+                            break;
+                        case "playerBornPos":
+                            {
+                                string[] valArr = e.InnerText.Split(',');
+                                mc.playerBornPos = new Vector3(float.Parse(valArr[0]), float.Parse(valArr[1]), float.Parse(valArr[2]));
+                            }
+                            break;
+                        case "playerBornRote":
+                            {
+                                string[] valArr = e.InnerText.Split(',');
+                                mc.playerBornRote = new Vector3(float.Parse(valArr[0]), float.Parse(valArr[1]), float.Parse(valArr[2]));
+                            }
+                            break;
+                        case "monsterLst":
+                            {
+                                // string[] valArr = e.InnerText.Split('#');
+                                // for (int waveIndex = 0; waveIndex < valArr.Length; waveIndex++) {
+                                //     if (waveIndex == 0) {
+                                //         continue;
+                                //     }
+                                //     string[] tempArr = valArr[waveIndex].Split('|');
+                                //     for (int j = 0; j < tempArr.Length; j++) {
+                                //         if (j == 0) {
+                                //             continue;
+                                //         }
+                                //         string[] arr = tempArr[j].Split(',');
+                                //         MonsterData md = new MonsterData {
+                                //             ID = int.Parse(arr[0]),
+                                //             mWave = waveIndex,
+                                //             mIndex = j,
+                                //             // mCfg = GetMonsterCfg(int.Parse(arr[0])),
+                                //             mBornPos = new Vector3(float.Parse(arr[1]), float.Parse(arr[2]), float.Parse(arr[3])),
+                                //             mBornRote = new Vector3(0, float.Parse(arr[4]), 0),
+                                //             mLevel = int.Parse(arr[5])
+                                //         };
+                                //         mc.monsterLst.Add(md);
+                                //     }
+                                // }
+                            }
+                            break;
+                        case "coin":
+                            mc.coin = int.Parse(e.InnerText);
+                            break;
+                        case "exp":
+                            mc.exp = int.Parse(e.InnerText);
+                            break;
+                        case "crystal":
+                            mc.crystal = int.Parse(e.InnerText);
+                            break;
+                    }
+                    mapCfgDataDic.Add(id, mc);
+                }
+            }
+            foreach (MapCfg item in mapCfgDataDic.Values) {
+
+                Debug.Log(item.ID);
+                Debug.Log(item.mapName);
+                Debug.Log(item.sceneName);
+                Debug.Log(item.power);
+            }
+        }
+
+        // public MonsterCfg GetMonsterCfg(int id) {
+        //     MonsterCfg data;
+        //     if (monsterCfgDataDic.TryGetValue(id, out data)) {
+        //         return data;
+        //     }
+        //     return null;
+        // }
+    }
+    #endregion
 }
