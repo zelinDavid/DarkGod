@@ -39,7 +39,7 @@ public class GameRoot : MonoBehaviour {
     //初始化各个模块
     protected void Init() {
         ResSvc resSev = GetComponent<ResSvc>();
-        resSev.InitService();
+        resSev.InitSvc();
 
         AudioSvc audioSvc = GetComponent<AudioSvc>();
         audioSvc.InitService();
