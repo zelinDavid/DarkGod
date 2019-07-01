@@ -60,6 +60,8 @@ public class MainCityWnd : WindowRoot {
         SetText(txtLevel, pd.lv);
         SetText(txtName, pd.name);
      
+        
+
     }
   
     public void ClickMenuBtn(){
@@ -86,7 +88,7 @@ public class MainCityWnd : WindowRoot {
 
         });
         OnDrag(imgTouch.gameObject, (PointerEventData evt) => {
-            //TODO:你上次写到这里
+            
             Vector3 destination = evt.position;
             float dis = (destination - startPos).magnitude;
             Vector3 dirction = (destination - startPos);

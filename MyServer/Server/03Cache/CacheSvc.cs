@@ -42,8 +42,7 @@ public class CacheSvc {
     /// 根据账号密码返回对应账号数据，密码错误返回null，账号不存在则默认创建新账号
     /// </summary>
     public PlayerData GetPlayerData(string acct, string pass) {
-        //TODO
-        //从数据库中查找账号数据
+       
         return null;
     }
 

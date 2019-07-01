@@ -24,7 +24,7 @@ public class Controller : MonoBehaviour {
         set {
             isMove = value != Vector2.zero;
             dir = value;
-            //   Debug.Log("ISMove:" + isMove);
+            //Debug.Log("ISMove:" + isMove);
         }
     }
     protected Transform camTrans;

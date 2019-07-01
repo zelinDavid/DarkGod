@@ -42,7 +42,7 @@ public class LoginSys : SystemRoot {
 
             createWind.SetWndState(true);
         } else {
-            //todo:进入主场景
+           
             MainCitySys.Instance.EnterMainCity();
         }
         Debug.Log(msg.rspLogin.playerData);
@@ -52,7 +52,7 @@ public class LoginSys : SystemRoot {
 
     public void RspRename(GameMsg msg) {
         GameRoot.Instance.SetPlayerName(msg.rspRename.name);
-        //todo:进入主场景
+    
         MainCitySys.Instance.EnterMainCity();
         createWind.SetWndState(false);
 

@@ -19,7 +19,7 @@ public class MainCitySys : SystemRoot {
     }
 
     public void EnterMainCity() {
-        //TODO:编码 resSvc.Config()
+        
         resSvc.AsyncLoadScene("SceneMainCity", () => {
 
             GameRoot.Instance.GetComponent<AudioListener>().enabled = false;
@@ -29,9 +29,7 @@ public class MainCitySys : SystemRoot {
             InitCamera();
 
             maincityWnd.SetWndState(true);
-
-            //TODO: 展示人物的摄像机激活状态设置为false
-
+     
         });
 
     }
