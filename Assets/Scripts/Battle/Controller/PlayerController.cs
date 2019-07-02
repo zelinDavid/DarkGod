@@ -54,8 +54,8 @@ public class PlayerController : Controller {
         }
 
         camOffset = transform.position - camTrans.position;
-        Debug.Log("transform pos:" + transform.position);
-        Debug.Log("camTrans pos:" + camTrans.position);
+        // Debug.Log("transform pos:" + transform.position);
+        // Debug.Log("camTrans pos:" + camTrans.position);
 
         // Invoke("CalcuOffset", 15);
     }

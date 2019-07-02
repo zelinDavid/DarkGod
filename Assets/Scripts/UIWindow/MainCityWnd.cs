@@ -59,11 +59,11 @@ public class MainCityWnd : WindowRoot {
         imgPowerPrg.fillAmount = pd.power * 1.0f / PECommon.GetPowerLimit(pd.lv);
         SetText(txtLevel, pd.lv);
         SetText(txtName, pd.name);
-     
-        
-
+   
     }
-  
+    
+    
+
     public void ClickMenuBtn(){
         audioSvc.PlayUIAudio(Constant.UIExtenBtn);
         menuState = !menuState;
