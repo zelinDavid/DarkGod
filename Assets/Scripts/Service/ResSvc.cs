@@ -7,8 +7,10 @@
 *****************************************************/
 
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Xml;
+
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -41,32 +43,64 @@ public class ResSvc : MonoBehaviour {
         InitSkillActionCfg(PathDefine.SkillActionCfg);
     }
 
-
     private Action prgCB = null;
-    public void AsyncLoadScene(string sceneName, Action loaded) {
-        GameRoot.Instance.loadingWnd.SetWndState();
+    // public void AsyncLoadScene(string sceneName, Action loaded) {
+    //     GameRoot.Instance.loadingWnd.SetWndState();
 
-        AsyncOperation sceneAsync = SceneManager.LoadSceneAsync(sceneName);
-        prgCB = () => {
-            float val = sceneAsync.progress;
-            GameRoot.Instance.loadingWnd.SetProgress(val);
-            if (val == 1) {
-                if (loaded != null) {
-                    loaded();
-                }
-                prgCB = null;
-                sceneAsync = null;
-                GameRoot.Instance.loadingWnd.SetWndState(false);
+    //     AsyncOperation sceneAsync = SceneManager.LoadSceneAsync(sceneName);
+    //     prgCB = () => {
+    //         float val = sceneAsync.progress;
+    //         GameRoot.Instance.loadingWnd.SetProgress(val);
+    //         if (val == 1) {
+    //             if (loaded != null) {
+    //                 loaded();
+    //             }
+    //             prgCB = null;
+    //             sceneAsync = null;
+    //             GameRoot.Instance.loadingWnd.SetWndState(false);
+    //         }
+    //     };
+    // }
+    public void AsyncLoadScene(string name, Action finishAction) {
+        StartCoroutine(coroutineLoadSync(name, finishAction));
+
+    }
+    private IEnumerator coroutineLoadSync(string name, Action finishAction) {
+        AsyncOperation operation = SceneManager.LoadSceneAsync(name);
+        operation.allowSceneActivation = false;
+        GameRoot.Instance.loadingWnd.SetWndState(true);
+        GameRoot.Instance.loadingWnd.SetProgress(0f);
+
+        float progress;
+        float currentProgress = 0;
+        while (operation.progress < 0.9f) {
+            progress = operation.progress;
+            while (currentProgress < progress) {
+                currentProgress += 0.01f;
+                GameRoot.Instance.loadingWnd.SetProgress(currentProgress);
+                yield return null;
             }
-        };
-    }
-
-    private void Update() {
-        if (prgCB != null) {
-            prgCB();
         }
+        operation.allowSceneActivation = true;
+        progress = 0.98f;
+        while (currentProgress < progress) {
+            currentProgress += 0.01f;
+            GameRoot.Instance.loadingWnd.SetProgress(currentProgress);
+
+            yield return null;
+        }
+        Debug.Log("coroutineLoadSync Finish");
+
+        while (operation.isDone == false) {
+            yield return null;
+        }
+        GameRoot.Instance.loadingWnd.SetProgress(1f);
+        GameRoot.Instance.loadingWnd.SetWndState(false);
+
+        finishAction();
     }
 
+    
     private Dictionary<string, AudioClip> adDic = new Dictionary<string, AudioClip>();
     public AudioClip LoadAudio(string path, bool cache = false) {
         AudioClip au = null;
@@ -117,8 +151,7 @@ public class ResSvc : MonoBehaviour {
         TextAsset xml = Resources.Load<TextAsset>(path);
         if (!xml) {
             PECommon.Log("xml file:" + path + " not exist", LogType.Error);
-        }
-        else {
+        } else {
             XmlDocument doc = new XmlDocument();
             doc.LoadXml(xml.text);
 
@@ -155,8 +188,7 @@ public class ResSvc : MonoBehaviour {
         string rdName = surnameLst[PETools.RDInt(0, surnameLst.Count - 1)];
         if (man) {
             rdName += manLst[PETools.RDInt(0, manLst.Count - 1)];
-        }
-        else {
+        } else {
             rdName += womanLst[PETools.RDInt(0, womanLst.Count - 1)];
         }
 
@@ -170,8 +202,7 @@ public class ResSvc : MonoBehaviour {
         TextAsset xml = Resources.Load<TextAsset>(path);
         if (!xml) {
             PECommon.Log("xml file:" + path + " not exist", LogType.Error);
-        }
-        else {
+        } else {
             XmlDocument doc = new XmlDocument();
             doc.LoadXml(xml.text);
 
@@ -200,27 +231,32 @@ public class ResSvc : MonoBehaviour {
                         case "power":
                             mc.power = int.Parse(e.InnerText);
                             break;
-                        case "mainCamPos": {
+                        case "mainCamPos":
+                            {
                                 string[] valArr = e.InnerText.Split(',');
                                 mc.mainCamPos = new Vector3(float.Parse(valArr[0]), float.Parse(valArr[1]), float.Parse(valArr[2]));
                             }
                             break;
-                        case "mainCamRote": {
+                        case "mainCamRote":
+                            {
                                 string[] valArr = e.InnerText.Split(',');
                                 mc.mainCamRote = new Vector3(float.Parse(valArr[0]), float.Parse(valArr[1]), float.Parse(valArr[2]));
                             }
                             break;
-                        case "playerBornPos": {
+                        case "playerBornPos":
+                            {
                                 string[] valArr = e.InnerText.Split(',');
                                 mc.playerBornPos = new Vector3(float.Parse(valArr[0]), float.Parse(valArr[1]), float.Parse(valArr[2]));
                             }
                             break;
-                        case "playerBornRote": {
+                        case "playerBornRote":
+                            {
                                 string[] valArr = e.InnerText.Split(',');
                                 mc.playerBornRote = new Vector3(float.Parse(valArr[0]), float.Parse(valArr[1]), float.Parse(valArr[2]));
                             }
                             break;
-                        case "monsterLst": {
+                        case "monsterLst":
+                            {
                                 string[] valArr = e.InnerText.Split('#');
                                 for (int waveIndex = 0; waveIndex < valArr.Length; waveIndex++) {
                                     if (waveIndex == 0) {
@@ -276,8 +312,7 @@ public class ResSvc : MonoBehaviour {
         TextAsset xml = Resources.Load<TextAsset>(path);
         if (!xml) {
             PECommon.Log("xml file:" + path + " not exist", LogType.Error);
-        }
-        else {
+        } else {
             XmlDocument doc = new XmlDocument();
             doc.LoadXml(xml.text);
 
@@ -303,8 +338,7 @@ public class ResSvc : MonoBehaviour {
                         case "mType":
                             if (e.InnerText.Equals("1")) {
                                 mc.mType = MonsterType.Normal;
-                            }
-                            else if (e.InnerText.Equals("2")) {
+                            } else if (e.InnerText.Equals("2")) {
                                 mc.mType = MonsterType.Boss;
                             }
                             break;
@@ -365,8 +399,7 @@ public class ResSvc : MonoBehaviour {
         TextAsset xml = Resources.Load<TextAsset>(path);
         if (!xml) {
             PECommon.Log("xml file:" + path + " not exist", LogType.Error);
-        }
-        else {
+        } else {
             XmlDocument doc = new XmlDocument();
             doc.LoadXml(xml.text);
 
@@ -421,8 +454,7 @@ public class ResSvc : MonoBehaviour {
         TextAsset xml = Resources.Load<TextAsset>(path);
         if (!xml) {
             PECommon.Log("xml file:" + path + " not exist", LogType.Error);
-        }
-        else {
+        } else {
             XmlDocument doc = new XmlDocument();
             doc.LoadXml(xml.text);
 
@@ -472,8 +504,7 @@ public class ResSvc : MonoBehaviour {
                 Dictionary<int, StrongCfg> dic = null;
                 if (strongDic.TryGetValue(sd.pos, out dic)) {
                     dic.Add(sd.startlv, sd);
-                }
-                else {
+                } else {
                     dic = new Dictionary<int, StrongCfg>();
                     dic.Add(sd.startlv, sd);
 
@@ -501,13 +532,13 @@ public class ResSvc : MonoBehaviour {
                 StrongCfg sd;
                 if (posDic.TryGetValue(i, out sd)) {
                     switch (type) {
-                        case 1://hp
+                        case 1: //hp
                             val += sd.addhp;
                             break;
-                        case 2://hurt
+                        case 2: //hurt
                             val += sd.addhurt;
                             break;
-                        case 3://def
+                        case 3: //def
                             val += sd.adddef;
                             break;
                     }
@@ -518,15 +549,13 @@ public class ResSvc : MonoBehaviour {
     }
     #endregion
 
-
     #region 自动引导配置
     private Dictionary<int, TaskRewardCfg> taskRewareDic = new Dictionary<int, TaskRewardCfg>();
     private void InitTaskRewardCfg(string path) {
         TextAsset xml = Resources.Load<TextAsset>(path);
         if (!xml) {
             PECommon.Log("xml file:" + path + " not exist", LogType.Error);
-        }
-        else {
+        } else {
             XmlDocument doc = new XmlDocument();
             doc.LoadXml(xml.text);
 
@@ -578,8 +607,7 @@ public class ResSvc : MonoBehaviour {
         TextAsset xml = Resources.Load<TextAsset>(path);
         if (!xml) {
             PECommon.Log("xml file:" + path + " not exist", LogType.Error);
-        }
-        else {
+        } else {
             XmlDocument doc = new XmlDocument();
             doc.LoadXml(xml.text);
 
@@ -628,11 +656,9 @@ public class ResSvc : MonoBehaviour {
                         case "dmgType":
                             if (e.InnerText.Equals("1")) {
                                 sc.dmgType = DamageType.AD;
-                            }
-                            else if (e.InnerText.Equals("2")) {
+                            } else if (e.InnerText.Equals("2")) {
                                 sc.dmgType = DamageType.AP;
-                            }
-                            else {
+                            } else {
                                 PECommon.Log("dmgType ERROR");
                             }
                             break;
@@ -681,8 +707,7 @@ public class ResSvc : MonoBehaviour {
         TextAsset xml = Resources.Load<TextAsset>(path);
         if (!xml) {
             PECommon.Log("xml file:" + path + " not exist", LogType.Error);
-        }
-        else {
+        } else {
             XmlDocument doc = new XmlDocument();
             doc.LoadXml(xml.text);
 
@@ -731,8 +756,7 @@ public class ResSvc : MonoBehaviour {
         TextAsset xml = Resources.Load<TextAsset>(path);
         if (!xml) {
             PECommon.Log("xml file:" + path + " not exist", LogType.Error);
-        }
-        else {
+        } else {
             XmlDocument doc = new XmlDocument();
             doc.LoadXml(xml.text);
 
