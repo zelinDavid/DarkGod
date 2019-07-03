@@ -35,7 +35,7 @@ public class InfoWnd : WindowRoot {
     #endregion
 
     private Vector2 startPos;
-    private float rotateSpeedBuffer = 5;
+    private float rotateSpeedBuffer = 2;
     protected override void InitWnd(){
         base.InitWnd();
         RegitTouch();

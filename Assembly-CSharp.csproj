@@ -57,6 +57,7 @@
      <Compile Include="Assets\Scripts\Battle\Controller\PlayerController.cs" />
      <Compile Include="Assets\Scripts\Common\BaseData.cs" />
      <Compile Include="Assets\Scripts\Common\Constant.cs" />
+     <Compile Include="Assets\Scripts\Common\MainCityMap.cs" />
      <Compile Include="Assets\Scripts\Common\PathDefine.cs" />
      <Compile Include="Assets\Scripts\Common\PEListener.cs" />
      <Compile Include="Assets\Scripts\Common\PETools.cs" />
@@ -72,6 +73,7 @@
      <Compile Include="Assets\Scripts\System\SystemRoot.cs" />
      <Compile Include="Assets\Scripts\UIWindow\CreateWindow.cs" />
      <Compile Include="Assets\Scripts\UIWindow\DynamicWnd.cs" />
+     <Compile Include="Assets\Scripts\UIWindow\GuidWnd.cs" />
      <Compile Include="Assets\Scripts\UIWindow\InfoWnd.cs" />
      <Compile Include="Assets\Scripts\UIWindow\LoadingWnd.cs" />
      <Compile Include="Assets\Scripts\UIWindow\LoginWnd.cs" />

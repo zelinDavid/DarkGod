@@ -13,7 +13,7 @@ public class WindowRoot : MonoBehaviour {
     public void SetWndState(bool isActive = true) {
         if (isActive) {
             gameObject.SetActive(true);
-        }else {
+        } else {
             gameObject.SetActive(false);
         }
         if (isActive) {
@@ -30,7 +30,7 @@ public class WindowRoot : MonoBehaviour {
     }
 
     protected virtual void ClearWnd() {
-        
+
     }
 
     #region Tool Functions
@@ -66,7 +66,7 @@ public class WindowRoot : MonoBehaviour {
 
     #endregion
 
-   protected T GetOrAddComponect<T>(GameObject go) where T : Component {
+    protected T GetOrAddComponect<T>(GameObject go) where T : Component {
         T t = go.GetComponent<T>();
         if (t == null) {
             t = go.AddComponent<T>();
@@ -95,6 +95,12 @@ public class WindowRoot : MonoBehaviour {
         PEListener listener = GetOrAddComponect<PEListener>(go);
         listener.onDrag = cb;
     }
-    #endregion
     
+    protected void SetSprite(Image img, string path) {
+        Sprite sp = resSvc.LoadSprite(path, true);
+        img.sprite = sp;
+    }
+
+    #endregion
+
 }

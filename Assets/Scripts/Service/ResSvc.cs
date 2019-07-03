@@ -89,7 +89,7 @@ public class ResSvc : MonoBehaviour {
 
             yield return null;
         }
-        Debug.Log("coroutineLoadSync Finish");
+        // Debug.Log("coroutineLoadSync Finish");
 
         while (operation.isDone == false) {
             yield return null;

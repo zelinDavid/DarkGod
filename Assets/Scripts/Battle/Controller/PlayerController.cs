@@ -121,6 +121,7 @@ public class PlayerController : Controller {
 
     public override void SetBlend(float blend) {
         targetBlend = blend;
+        SetMove(blend == Constant.BlendMove, 0f);
     }
 
     public override void SetFX(string name, float destoryTime) {
