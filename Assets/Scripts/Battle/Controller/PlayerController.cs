@@ -90,7 +90,7 @@ public class PlayerController : Controller {
         // }
     }
 
-    //TODO:暂时没搞明白为什么这么写;
+    //暂时没搞明白为什么这么写;
     //answer:运动方向加上摄像机旋转方向, 使用人物移动方向始终和屏幕上下左右保持一致.
     private void SetDir() {
         float angle = Vector2.SignedAngle(Dir, new Vector2(0, 1)) + camTrans.eulerAngles.y;

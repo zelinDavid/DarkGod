@@ -15,7 +15,7 @@ public class MainCitySys : SystemRoot {
     protected Transform charShowCam;
     protected Vector3 charCamOffset;
     private Vector3 charCamRotation;
-    private AutoGuideCfg curtTaskData;
+    public AutoGuideCfg curtTaskData;
     private Transform[] npcPosTrans;
 
     private bool isNavGuide = false;
@@ -53,8 +53,6 @@ public class MainCitySys : SystemRoot {
     }
 
     public void ClickMeBtn() {
-
-        //TODO:position计算公式有问题
         charShowCam.localPosition = PlayerController.transform.position + PlayerController.transform.forward * 3.5f + PlayerController.transform.up * 1.28f;
         charShowCam.localEulerAngles = PlayerController.transform.localEulerAngles + new Vector3(0, 180, 0);
         infoWnd.SetWndState(true);
@@ -82,6 +80,10 @@ public class MainCitySys : SystemRoot {
                 StopNavAndShowNav();
             }
         }
+    }
+
+    public void UpdateTask(){
+
     }
 
     public void SetMoveDir(Vector2 dir) {
@@ -149,7 +151,7 @@ public class MainCitySys : SystemRoot {
         nav.isStopped = true;
         nav.enabled = false;
         isNavGuide = false;
-        // guidWnd.SetWndState();
+        guidWnd.SetWndState(true);
         PlayerController.SetBlend(Constant.BlendIdle);
 
     }
