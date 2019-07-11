@@ -30,7 +30,7 @@ public class UnityToSVN {
             SVNCommitAll();
         }
     }
-     
+
     [MenuItem(Menu_Commit_All)]
     public static void SVNCommitAll() {
         string path = Application.dataPath;
