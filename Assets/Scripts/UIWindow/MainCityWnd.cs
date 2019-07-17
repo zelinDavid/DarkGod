@@ -134,13 +134,16 @@ public class MainCityWnd : WindowRoot {
         });
 
         OnClick(btnGuide.gameObject, (obj) => {
-            if (curtTaskData == null || curtTaskData.npcID == -1)
-            {
+            if (curtTaskData == null || curtTaskData.npcID == -1) {
                 Debug.Log("更多任务,敬请开发等待");
             }
-                MainCitySys.Instance.guidWithCfg(curtTaskData);
+            MainCitySys.Instance.guidWithCfg(curtTaskData);
         }, null);
 
+    }
+
+    public void ClickBattleBtn() {
+        GameRoot.Instance.SendBattleMsg();
     }
 
 }

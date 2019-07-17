@@ -96,11 +96,14 @@ public class NetSvc : MonoBehaviour {
                 LoginSys.Instance.RspRename(msg);
 
                 break;
+            case (int)CMD.RspFBFight:
+                // BattleSys.Instance.loadScene(msg);
+                GameRoot.Instance.LoadBattleScne(msg);
+                break;
             case (int) CMD.None:
 
                 break;
-         
-
+          
         }
     }
 

@@ -13,7 +13,7 @@ public class GameRoot : MonoBehaviour {
     public static GameRoot Instance = null;
     private DynamicWnd dynamicWnd;
     public LoadingWnd loadingWnd;
-
+    private BattleSys battleSys;
 
     public void Start() {
         Instance = this;
@@ -52,6 +52,9 @@ public class GameRoot : MonoBehaviour {
         MainCitySys main = GetComponent<MainCitySys>();
         main.InitSystem();
 
+        battleSys = GetComponent<BattleSys>();
+        battleSys.InitSystem();
+
         login.EnterLogin();
     }
  
@@ -75,4 +78,19 @@ public class GameRoot : MonoBehaviour {
         }
         this.playerData.name = name;
     }
+
+    public void SendBattleMsg(){
+        NetSvc.Instance.SendMessage(new GameMsg{
+           cmd = (int)CMD.ReqFBFight,
+                reqFBFight = new ReqFBFight{
+                fbid = playerData.fuben,
+            },
+        });
+    }
+
+    public void LoadBattleScne(GameMsg msg){
+        battleSys.LoadScene(msg.rspFBFight.fbid);
+        MainCitySys.Instance.maincityWnd.SetWndState(false);
+    }
+ 
 }
