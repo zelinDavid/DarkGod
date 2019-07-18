@@ -5,6 +5,10 @@ public class BattleMgr : MonoBehaviour {
     SkillMgr skillMgr;
     StateMgr stateMgr;
 
+    public float lastAtkTime = 0;
+    public int comIndex = 0;
+
+    
     public void Init(int id) {
         skillMgr =  gameObject.AddComponent<SkillMgr>();
         stateMgr =  gameObject.AddComponent<StateMgr>();
