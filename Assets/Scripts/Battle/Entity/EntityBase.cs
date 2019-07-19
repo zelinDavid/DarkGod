@@ -49,7 +49,7 @@ public abstract class EntityBase {
     }
 
     public void SkillAttack(int skillID) {
-        //skillMgr.attack() 
+        // skillMgr.attack() 
     }
     public void Hit() {
         stateMgr.ChangeStatus(this, AniState.Hit, null);

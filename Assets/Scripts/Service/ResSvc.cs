@@ -73,6 +73,41 @@ public class ResSvc : MonoBehaviour {
 
         float progress;
         float currentProgress = 0;
+        // while (operation.progress < 0.9f) {
+        //     progress = operation.progress;
+        //     while (currentProgress < progress) {
+        //         currentProgress += 0.01f;
+        //         GameRoot.Instance.loadingWnd.SetProgress(currentProgress);
+        //         yield return null;
+        //     }
+        // }
+        operation.allowSceneActivation = true;
+        progress = 0.98f;
+        // while (currentProgress < progress) {
+        //     currentProgress += 0.01f;
+        //     GameRoot.Instance.loadingWnd.SetProgress(currentProgress);
+
+        //     yield return null;
+        // }
+        // Debug.Log("coroutineLoadSync Finish");
+
+        while (operation.isDone == false) {
+            yield return null;
+        }
+        GameRoot.Instance.loadingWnd.SetProgress(1f);
+        GameRoot.Instance.loadingWnd.SetWndState(false);
+
+        finishAction();
+    }
+
+    private IEnumerator coroutineLoadSync111(string name, Action finishAction) {
+        AsyncOperation operation = SceneManager.LoadSceneAsync(name);
+        operation.allowSceneActivation = false;
+        GameRoot.Instance.loadingWnd.SetWndState(true);
+        GameRoot.Instance.loadingWnd.SetProgress(0f);
+
+        float progress;
+        float currentProgress = 0;
         while (operation.progress < 0.9f) {
             progress = operation.progress;
             while (currentProgress < progress) {
@@ -100,7 +135,6 @@ public class ResSvc : MonoBehaviour {
         finishAction();
     }
 
-    
     private Dictionary<string, AudioClip> adDic = new Dictionary<string, AudioClip>();
     public AudioClip LoadAudio(string path, bool cache = false) {
         AudioClip au = null;
