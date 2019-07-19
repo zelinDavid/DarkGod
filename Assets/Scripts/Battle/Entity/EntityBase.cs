@@ -11,11 +11,12 @@ public abstract class EntityBase {
     public SkillMgr skillMgr;
     public Controller controller;
     public BattleMgr battleMgr;
-
+    public string name;
     public BattleProps battleProp;
     public bool canReleaseSkill = true; //是否能释放技能
     public SkillCfg currentSkillCfg;
-    private bool canControl = true;
+    public bool canControl = true;
+    public float HP;
     //组合动作技能,queue保存的是动作id.
     private Queue<int> comboQue = new Queue<int>();
     public int nextSkillID;
@@ -25,6 +26,15 @@ public abstract class EntityBase {
     private List<int> skActionCBLst = new List<int>();
 
     public int skillEndCB = -1;
+
+    public EntityBase(BattleMgr battle,StateMgr state,SkillMgr skill,Controller control)
+    {
+        battleMgr = battle;
+        stateMgr = state;
+        skillMgr = skill;
+        controller = control;
+
+    }
 
     public void Idle() {
         stateMgr.ChangeStatus(this, AniState.Idle, null);
@@ -145,4 +155,17 @@ public abstract class EntityBase {
         if(controller == null) return null;
         return  controller.ani.runtimeAnimatorController.animationClips;
     }
+
+    public AudioSource GetPlayerAudioSource(){
+        if(!controller){
+            return null;
+        }
+        return controller.gameObject.GetComponent<AudioSource>();
+    }
+
+    public void SetBattleProps(BattleProps props){
+        this.battleProp = props;
+        HP = props.hp;
+    }
+
 }

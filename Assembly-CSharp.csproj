@@ -58,6 +58,8 @@
      <Compile Include="Assets\Scripts\Battle\Controller\Controller.cs" />
      <Compile Include="Assets\Scripts\Battle\Controller\PlayerController.cs" />
      <Compile Include="Assets\Scripts\Battle\Entity\EntityBase.cs" />
+     <Compile Include="Assets\Scripts\Battle\Entity\MonsterEntity.cs" />
+     <Compile Include="Assets\Scripts\Battle\Entity\PlayerEntity.cs" />
      <Compile Include="Assets\Scripts\Battle\FSM\AttackState.cs" />
      <Compile Include="Assets\Scripts\Battle\FSM\BornState.cs" />
      <Compile Include="Assets\Scripts\Battle\FSM\DieState.cs" />

@@ -6,8 +6,8 @@ public class BattleSys : SystemRoot {
     private int fbid;
     public static BattleSys Instance;
     public PlayerCtrWnd playerCtrlWnd;
-    private PlayerController playerCtr;
-    private GameObject player;
+    public PlayerController playerCtr;
+    public GameObject player;
     public override void InitSystem() {
         base.InitSystem();
         Instance = this;
@@ -25,9 +25,7 @@ public class BattleSys : SystemRoot {
         ResSvc.Instance.AsyncLoadScene(cfg.sceneName, () => {
             audioSvc.PlayBgAudio(Constant.BGHuangYe);
             LoadPlayer(cfg);
-
             playerCtrlWnd.SetWndState();
-
         });
     }
 

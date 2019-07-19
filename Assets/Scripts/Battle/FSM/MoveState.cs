@@ -14,4 +14,5 @@ public class MoveState : IState
     {
          entity.SetBlend(Constant.BlendMove);
     }
+    
 }

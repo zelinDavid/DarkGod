@@ -131,4 +131,8 @@ public class Constant {
     //普攻连招有效间隔
     public static int ComboSpace = 500;
 
+
+    //人物名称
+    public static string PlayerEntityName = "AssassinBattle";
+
 }
