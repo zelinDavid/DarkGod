@@ -2,12 +2,11 @@ using System;
 
 using UnityEngine;
 
-public class TimeSvc : SystemRoot {
+public class TimeSvc : MonoBehaviour {
     public static TimeSvc Instance = null;
     private PETimer peTimer;
 
-    public override void InitSystem() {
-        base.InitSystem();
+    public void InitService() {
         Instance = this;
         peTimer = new PETimer();
         peTimer.SetLog((str) => {

@@ -44,6 +44,10 @@ public class GameRoot : MonoBehaviour {
         AudioSvc audioSvc = GetComponent<AudioSvc>();
         audioSvc.InitService();
 
+
+        TimeSvc timeSvc = GetComponent<TimeSvc>();
+        timeSvc.InitService();
+        
         //业务系统初始化
         LoginSys login = GetComponent<LoginSys>();
         login.InitSystem();

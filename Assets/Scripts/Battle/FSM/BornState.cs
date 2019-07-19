@@ -12,9 +12,10 @@ public class BornState : IState
 
     public void Process(EntityBase entity, params object[] args)
     {
+     
         entity.SetAction(Constant.ActionBorn);
         TimeSvc.Instance.AddTimeTask((deltaTime) =>{
             entity.SetAction(Constant.ActionDefault);
-        },500);
+        },1.12 * 1000);
     }
 }

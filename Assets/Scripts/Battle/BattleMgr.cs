@@ -22,6 +22,7 @@ public class BattleMgr : MonoBehaviour {
     battle.controller,skill.state 
     */
     private void initPlayer() {
+        Debug.Log("BattleSys.Instance.playerCtr"+ BattleSys.Instance.playerCtr);
         playerEntity = new PlayerEntity(this, stateMgr, skillMgr, BattleSys.Instance.playerCtr);
         playerEntity.name = Constant.PlayerEntityName;
 
@@ -37,7 +38,11 @@ public class BattleMgr : MonoBehaviour {
             critical = pd.critical
         };
         playerEntity.SetBattleProps(props);
-
+        //初始化装填
+        Invoke("ddd",5);
+        playerEntity.Born();
     }
-
+    public void ddd(){
+        
+    }
 }

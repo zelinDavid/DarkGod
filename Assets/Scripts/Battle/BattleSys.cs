@@ -16,22 +16,23 @@ public class BattleSys : SystemRoot {
 
     //创建新的scene.并且初始化各种东西.
     public void LoadScene(int fbid) {
-        GameObject go = new GameObject("BattleRoot");
-        go.transform.SetParent(GameRoot.Instance.transform);
-        BattleMgr battle = go.AddComponent<BattleMgr>();
-        battle.Init(fbid);
 
         MapCfg cfg = ResSvc.Instance.GetMapCfg(fbid);
         ResSvc.Instance.AsyncLoadScene(cfg.sceneName, () => {
             audioSvc.PlayBgAudio(Constant.BGHuangYe);
             LoadPlayer(cfg);
+            GameObject go = new GameObject("BattleRoot");
+            go.transform.SetParent(GameRoot.Instance.transform);
+            BattleMgr battle = go.AddComponent<BattleMgr>();
+            battle.Init(fbid);
+         
             playerCtrlWnd.SetWndState();
         });
     }
 
     //TODO:根据配置表中的信息加载人物位置
     private void LoadPlayer(MapCfg mapData) {
-        player = ResSvc.Instance.LoadPrefab(PathDefine.AssissnCityPlayerPrefab);
+        player = ResSvc.Instance.LoadPrefab(PathDefine.AssissnBattlePlayerPrefab);
         player.transform.position = mapData.playerBornPos;
         player.transform.localScale = new Vector3(1.5f, 1.5f, 1.5f);
         player.transform.localEulerAngles = mapData.playerBornRote;

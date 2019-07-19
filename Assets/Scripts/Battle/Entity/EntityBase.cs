@@ -81,6 +81,7 @@ public abstract class EntityBase {
     }
 
     public virtual void SetAction(int action) {
+         
         if (controller) {
             controller.SetAction(action);
         }
