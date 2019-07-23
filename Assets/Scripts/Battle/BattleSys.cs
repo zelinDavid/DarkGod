@@ -1,3 +1,5 @@
+using System;
+
 using PEProtocol;
 
 using UnityEngine;
@@ -14,7 +16,6 @@ public class BattleSys : SystemRoot {
     public override void InitSystem() {
         base.InitSystem();
         Instance = this;
-        
 
     }
 
@@ -73,21 +74,44 @@ public class BattleSys : SystemRoot {
             case 2:
                 ReleaseSkill3();
                 break;
+            case 3:
+                ReleaseNormal();
+                break;
         }
 
+    }
 
+    private double lastAtTime = 0;
+    private int[] comBoArr = new int[] { 111, 112, 113, 114, 115};
+    public int comboIndex = 0;
+    private void ReleaseNormal() {
+        Debug.Log( playerEntity.currentAniState);
+        if (playerEntity.currentAniState == AniState.Idle || playerEntity.currentAniState == AniState.Move) {
+            playerEntity.Attack(comBoArr[0]);
+            comboIndex = 0;
+            lastAtTime = TimeSvc.Instance.GetNowTime();
+        } else if (playerEntity.currentAniState == AniState.Attack && lastAtTime != 0) {
+            if (comboIndex == comBoArr.Length - 1) {
+                comboIndex = 0;
+                lastAtTime = 0;  
+            }else if(TimeSvc.Instance.GetNowTime() - lastAtTime < Constant.ComboSpace && lastAtTime != 0){
+                comboIndex ++;
+                playerEntity.AddComnQueue(comBoArr[comboIndex]);
+                lastAtTime = TimeSvc.Instance.GetNowTime();
+            }
+        }
     }
 
     private void ReleaseSkill1() {
-      
+
         playerEntity.Attack(101);
     }
     private void ReleaseSkill2() {
-         
+
         playerEntity.Attack(102);
     }
     private void ReleaseSkill3() {
-     
+
         playerEntity.Attack(103);
     }
 

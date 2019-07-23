@@ -54,6 +54,11 @@ public class WindowRoot : MonoBehaviour {
     protected void SetText(Text txt, string context = "") {
         txt.text = context;
     }
+
+    protected void SetText(Text txt, float num) {
+        txt.text = num.ToString();
+    }
+
     protected void SetText(Transform trans, int num = 0) {
         SetText(trans.GetComponent<Text>(), num);
     }
@@ -95,7 +100,7 @@ public class WindowRoot : MonoBehaviour {
         PEListener listener = GetOrAddComponect<PEListener>(go);
         listener.onDrag = cb;
     }
-    
+
     protected void SetSprite(Image img, string path) {
         Sprite sp = resSvc.LoadSprite(path, true);
         img.sprite = sp;

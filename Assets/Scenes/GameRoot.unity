@@ -5061,7 +5061,7 @@ MonoBehaviour:
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
   m_Sprite: {fileID: 21300000, guid: 187474ae44f6b724daca40d30ccb74e0, type: 3}
-  m_Type: 0
+  m_Type: 3
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 4
@@ -7772,8 +7772,14 @@ MonoBehaviour:
   imgDirBg: {fileID: 10044840}
   imgDirPoint: {fileID: 1740984751}
   firstSkill: {fileID: 113890483}
+  cd1: {fileID: 693512642}
+  cd1Text: {fileID: 1146878986}
   secondSkil: {fileID: 432926229}
+  cd2: {fileID: 1706657746}
+  cd2Text: {fileID: 1712089215}
   thirdSkill: {fileID: 1650573707}
+  cd3: {fileID: 2042486049}
+  cd3Text: {fileID: 1648843753}
   normalAttack: {fileID: 585273589}
   energy: {fileID: 1164671608}
   blood: {fileID: 1131157211}
@@ -12022,7 +12028,7 @@ MonoBehaviour:
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
   m_Sprite: {fileID: 21300000, guid: 187474ae44f6b724daca40d30ccb74e0, type: 3}
-  m_Type: 0
+  m_Type: 3
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 4
@@ -14343,7 +14349,7 @@ MonoBehaviour:
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
   m_Sprite: {fileID: 21300000, guid: 187474ae44f6b724daca40d30ccb74e0, type: 3}
-  m_Type: 0
+  m_Type: 3
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 4

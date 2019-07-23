@@ -81,6 +81,7 @@ public class SkillMgr : MonoBehaviour {
             Debug.Log("skillEndCB: ");
         }, skillCfg.skillTime);
 
+        Debug.Log("timer:  " + timer);
     }
 
     private void CalMoveDistance(EntityBase entity, int skillID) {

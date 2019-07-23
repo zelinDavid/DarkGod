@@ -1,3 +1,4 @@
+using System.Linq;
 using System.Collections.Generic;
 using System.IO;
 
@@ -19,7 +20,7 @@ public abstract class EntityBase {
     public float HP;
     //组合动作技能,queue保存的是动作id.
     private Queue<int> comboQue = new Queue<int>();
-    public int nextSkillID;
+    public int nextSkillID = 0;
     //技能唯一的回调time Task ID;
     public List<int> skMoveCBLst = new List<int>();
     //技能伤害计算回调time Task ID;
@@ -77,6 +78,9 @@ public abstract class EntityBase {
             } else {
                 nextSkillID = 0;
             }
+            Debug.Log("ExitCurtSkill");
+            Debug.Log(nextSkillID);
+            Debug.Log(comboQue.Count);
         }
         currentSkillCfg = null;
         SetAction(Constant.ActionDefault);
@@ -189,5 +193,10 @@ public abstract class EntityBase {
         if (index != -1) {
             skMoveCBLst.RemoveAt(index);
         }
+    }
+
+    public void AddComnQueue(int skillID){
+        comboQue.Enqueue(skillID);
+     
     }
 }

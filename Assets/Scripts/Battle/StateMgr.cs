@@ -15,7 +15,7 @@ public class StateMgr : MonoBehaviour {
         FSM.Add(AniState.Hit, new HitState());
         FSM.Add(AniState.Idle, new IdleState());
         FSM.Add(AniState.Move, new MoveState());
-        Debug.Log("StateMgr Init");
+        // Debug.Log("StateMgr Init");
     } 
 
     public void ChangeStatus(EntityBase entity, AniState state, params object[] args) {

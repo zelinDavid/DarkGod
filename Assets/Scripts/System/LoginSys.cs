@@ -21,9 +21,9 @@ public class LoginSys : SystemRoot {
 
         Debug.Log("init loginSys");
 
-        Invoke("Test", 1);
+        Invoke("Test", 0.1f);
     }
-    
+
     private void Test(){
         loginWind.clickEnterBtn();
     }
