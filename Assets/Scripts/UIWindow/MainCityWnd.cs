@@ -44,6 +44,8 @@ public class MainCityWnd : WindowRoot {
 
         RegisterTouchEvents();
         refreshUI();
+        
+        Invoke("ClickBattleBtn", 1);
     }
 
     private void refreshUI() {

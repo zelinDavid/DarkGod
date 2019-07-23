@@ -21,14 +21,13 @@ public abstract class EntityBase {
     private Queue<int> comboQue = new Queue<int>();
     public int nextSkillID;
     //技能唯一的回调time Task ID;
-    private List<int> skMoveCBLst = new List<int>();
+    public List<int> skMoveCBLst = new List<int>();
     //技能伤害计算回调time Task ID;
-    private List<int> skActionCBLst = new List<int>();
+    public List<int> skActionCBLst = new List<int>();
 
     public int skillEndCB = -1;
 
-    public EntityBase(BattleMgr battle,StateMgr state,SkillMgr skill,Controller control)
-    {
+    public EntityBase(BattleMgr battle, StateMgr state, SkillMgr skill, Controller control) {
         battleMgr = battle;
         stateMgr = state;
         skillMgr = skill;
@@ -49,8 +48,11 @@ public abstract class EntityBase {
     }
 
     public void SkillAttack(int skillID) {
-        // skillMgr.attack() 
+        skillMgr.SkillAttack(this, skillID) ;
+        //TODO: 你上次写到这里
+
     }
+
     public void Hit() {
         stateMgr.ChangeStatus(this, AniState.Hit, null);
     }
@@ -81,7 +83,7 @@ public abstract class EntityBase {
     }
 
     public virtual void SetAction(int action) {
-         
+
         if (controller) {
             controller.SetAction(action);
         }
@@ -116,9 +118,8 @@ public abstract class EntityBase {
         battleMgr. 技能释放记录清零, 组合技能index清零.
     */
     public void RemoveSkillCB() {
-        if (entityType == EntityType.Player)
-        {
-           canReleaseSkill = false; 
+        if (entityType == EntityType.Player) {
+            canReleaseSkill = false;
         }
         SetDirection(Vector2.zero);
         controller.SetMove(false, 0);
@@ -152,21 +153,41 @@ public abstract class EntityBase {
         controller.gameObject.SetActive(active);
     }
 
-    public AnimationClip[] GetClips(){
-        if(controller == null) return null;
-        return  controller.ani.runtimeAnimatorController.animationClips;
+    public AnimationClip[] GetClips() {
+        if (controller == null) return null;
+        return controller.ani.runtimeAnimatorController.animationClips;
     }
 
-    public AudioSource GetPlayerAudioSource(){
-        if(!controller){
+    public AudioSource GetPlayerAudioSource() {
+        if (!controller) {
             return null;
         }
         return controller.gameObject.GetComponent<AudioSource>();
     }
 
-    public void SetBattleProps(BattleProps props){
+    public void SetBattleProps(BattleProps props) {
         this.battleProp = props;
         HP = props.hp;
     }
 
+    public void SetMove(bool move, float speed) {
+        if (controller == null) {
+            Debug.LogError("notController");
+            return;
+        }
+        controller.SetMove(move, speed);
+    }
+    
+    public void RmvMoveCB(int tid) {
+        int index = -1;
+        for (int i = 0; i < skMoveCBLst.Count; i++) {
+            if (skMoveCBLst[i] == tid) {
+                index = i;
+                break;
+            }
+        }
+        if (index != -1) {
+            skMoveCBLst.RemoveAt(index);
+        }
+    }
 }

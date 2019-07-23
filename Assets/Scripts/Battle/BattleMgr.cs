@@ -13,6 +13,7 @@ public class BattleMgr : MonoBehaviour {
 
     public void Init(int id) {
         skillMgr = gameObject.AddComponent<SkillMgr>();
+        skillMgr.Init();
         stateMgr = gameObject.AddComponent<StateMgr>();
         stateMgr.Init();
         initPlayer();
@@ -39,10 +40,12 @@ public class BattleMgr : MonoBehaviour {
         };
         playerEntity.SetBattleProps(props);
         //初始化装填
-        Invoke("ddd",5);
         playerEntity.Born();
     }
-    public void ddd(){
-        
+    
+    public void Attack(int skillID){
+        playerEntity.Attack(skillID);
     }
+
+
 }

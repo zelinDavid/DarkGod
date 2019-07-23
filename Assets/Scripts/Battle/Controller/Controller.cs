@@ -22,6 +22,7 @@ public class Controller : MonoBehaviour {
             return dir;
         }
         set {
+            
             isMove = value != Vector2.zero;
             dir = value;
         }
@@ -51,9 +52,14 @@ public class Controller : MonoBehaviour {
     public virtual void SetMove(bool move, float speed) {
         isMove = move;
         skillMoveSpeed = speed;
-        // Debug.Log("ISMove:" + isMove);
+ 
     }
 
+    public virtual void SetSkillMove(bool move, float speed) {
+        skillMove = move;
+        skillMoveSpeed = speed;
+ 
+    }
     public virtual void SetAtkRotationLocal(Vector2 atkDir) {
         float angle = Vector2.SignedAngle(atkDir, new Vector2(0,1));
         transform.localEulerAngles = new Vector3(0,angle, 0);
@@ -62,4 +68,5 @@ public class Controller : MonoBehaviour {
         float angle = Vector2.SignedAngle(camDir, new Vector2(0,1)) + camTrans.localEulerAngles.y;
         transform.localEulerAngles = new Vector3(0,angle, 0); 
     }
+ 
 }

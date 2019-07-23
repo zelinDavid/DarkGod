@@ -8,24 +8,27 @@ public class BattleSys : SystemRoot {
     public PlayerCtrWnd playerCtrlWnd;
     public PlayerController playerCtr;
     public GameObject player;
+    public BattleMgr battleMgr;
+    private PlayerEntity playerEntity;
+
     public override void InitSystem() {
         base.InitSystem();
         Instance = this;
+        
 
     }
 
     //创建新的scene.并且初始化各种东西.
     public void LoadScene(int fbid) {
-
         MapCfg cfg = ResSvc.Instance.GetMapCfg(fbid);
         ResSvc.Instance.AsyncLoadScene(cfg.sceneName, () => {
             audioSvc.PlayBgAudio(Constant.BGHuangYe);
             LoadPlayer(cfg);
             GameObject go = new GameObject("BattleRoot");
             go.transform.SetParent(GameRoot.Instance.transform);
-            BattleMgr battle = go.AddComponent<BattleMgr>();
-            battle.Init(fbid);
-         
+            battleMgr = go.AddComponent<BattleMgr>();
+            battleMgr.Init(fbid);
+            playerEntity = battleMgr.playerEntity;
             playerCtrlWnd.SetWndState();
         });
     }
@@ -54,13 +57,38 @@ public class BattleSys : SystemRoot {
         }
         playerCtr.Dir = dir;
     }
+
+    public bool CanReleaseSkill() {
+        return battleMgr.playerEntity.canReleaseSkill;
+    }
+
+    public void Attack(int index) {
+        switch (index) {
+            case 0:
+                ReleaseSkill1();
+                break;
+            case 1:
+                ReleaseSkill2();
+                break;
+            case 2:
+                ReleaseSkill3();
+                break;
+        }
+
+
+    }
+
+    private void ReleaseSkill1() {
+      
+        playerEntity.Attack(101);
+    }
+    private void ReleaseSkill2() {
+         
+        playerEntity.Attack(102);
+    }
+    private void ReleaseSkill3() {
+     
+        playerEntity.Attack(103);
+    }
+
 }
-
-/*
-    把他当做你今天下午的任务, 今天下午的任务:
-    人物控制移动,生成怪物;
-    
-/*
-    加载场景, 初始化脚本 battleMgr 及  playerCtrWnd等. StateMgr, SkillMgr
-
- */

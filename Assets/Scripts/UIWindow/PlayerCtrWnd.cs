@@ -17,17 +17,23 @@ public class PlayerCtrWnd : WindowRoot {
     public Button thirdSkill;
     public Button normalAttack;
 
-    public Image  energy;
+    public Image energy;
     public Image blood;
     public Text bloodText;
     public Text level;
-    
+
     public Text bossText;
     public Image bossImg;
 
-    protected override void InitWnd(){
+    private bool isSkill1CD;
+    private bool isSKill2CD;
+    private bool isSkill3CD;
+    private BattleSys battle;
+
+    protected override void InitWnd() {
         RegisterTouchEvents();
-         SetActive(imgDirPoint, false);
+        SetActive(imgDirPoint, false);
+        battle = BattleSys.Instance;
     }
 
     private void RegisterTouchEvents() {
@@ -66,20 +72,32 @@ public class PlayerCtrWnd : WindowRoot {
         });
 
         firstSkill.onClick.AddListener(() => {
-            Debug.Log("firstSkill");
+            // if (!isSkill1CD && CanReleaseSkill()) {
+            if (true) {
+                battle.Attack(0);
+            }
         });
 
         secondSkil.onClick.AddListener(() => {
-            Debug.Log("firstSkill");
+            if (!isSKill2CD && CanReleaseSkill()) {
+                battle.Attack(1);
+            }
 
         });
         thirdSkill.onClick.AddListener(() => {
-
+            if (!isSkill3CD && CanReleaseSkill()) {
+                battle.Attack(2);
+            }
         });
 
         normalAttack.onClick.AddListener(() => {
 
         });
+    }
+
+    private bool CanReleaseSkill() {
+        return BattleSys.Instance.CanReleaseSkill();
 
     }
+
 }

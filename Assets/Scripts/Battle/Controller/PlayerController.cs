@@ -25,6 +25,7 @@ public class PlayerController : Controller {
     
      */
     public override void Init() {
+        base.Init();
         camTrans = Camera.main.transform;
 
         if (daggerskill1fx != null) {
@@ -59,7 +60,6 @@ public class PlayerController : Controller {
 
     private void CalcuOffset() {
         Debug.Log("camerans pos:" + camTrans.position);
-
     }
 
     private void SetCam() {
@@ -81,10 +81,10 @@ public class PlayerController : Controller {
             SetCam();
         }
 
-        // if (skillMove) {
-        //     SetSkillMove();
-        //     SetCam();
-        // }
+        if (skillMove) {
+            SetSkillMove();
+            SetCam();
+        }
     }
 
     //暂时没搞明白为什么这么写;

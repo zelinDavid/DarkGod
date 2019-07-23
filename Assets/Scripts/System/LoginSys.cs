@@ -20,6 +20,12 @@ public class LoginSys : SystemRoot {
         Instance = this;
 
         Debug.Log("init loginSys");
+
+        Invoke("Test", 1);
+    }
+    
+    private void Test(){
+        loginWind.clickEnterBtn();
     }
 
     public void EnterLogin() {
