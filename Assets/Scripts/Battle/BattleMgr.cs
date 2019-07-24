@@ -21,6 +21,9 @@ public class BattleMgr : MonoBehaviour {
         stateMgr = gameObject.AddComponent<StateMgr>();
         stateMgr.Init();
         initPlayer();
+
+        //TODO:暂时写到这里
+        LoadMonsterByWaveID(1);
     }
 
     private void InitData() {
@@ -67,16 +70,18 @@ public class BattleMgr : MonoBehaviour {
                 go.transform.localEulerAngles = md.mBornRote;
                 go.transform.localScale = Vector3.one;
                 go.name = "m" + md.mWave + "_" + md.mIndex;
-                go.SetActive(false);
-                MonsterController monsterCt = go.AddComponent<MonsterController>();
+                // go.SetActive(false);
+                MonsterController monsterCt = go.GetComponent<MonsterController>();
                 monsterCt.Init();
                 MonsterEntity monsterEntity = new MonsterEntity(this, stateMgr, skillMgr, monsterCt);
+                monsterEntity.md = md;
+                monsterEntity.SetBattleProps(md.mCfg.bps);
                 monsterDic.Add(go.name, monsterEntity);
                 if (md.mCfg.mType == MonsterType.Boss)
                 {
                     
                 }else if(md.mCfg.mType == MonsterType.Normal){
-                    //TODO:显示对应的血量条.
+                    GameRoot.Instance.AddHpItemInfo(go.name,monsterCt.hpRoot,monsterEntity.battleProp.hp);
                 }
             }
         }

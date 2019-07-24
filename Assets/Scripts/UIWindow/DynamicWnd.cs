@@ -53,15 +53,21 @@ public class DynamicWnd : WindowRoot {
     }
 
     private Dictionary<string, ItemEntityHP> itemDic = new Dictionary<string, ItemEntityHP>();
-    public void AddHpItemInfo(string mName, Transform trans, int hp) {
-        //创建hpUI到 hpRoot下, 更新其位置, 添加entityHp组件并添加到字典中
-        //TODO:待修改
+    /// <summary>
+    /// 创建血条信息
+    /// </summary>
+    /// <param name="mName">prefab名称</param>
+    /// <param name="trans">对象血条所在位置到的transform</param>
+    /// <param name="hp">血量</param>
+    public void AddHpItemInfo(string mName, Transform hpRoot, int hp) {
+        Debug.Log("AddHpItemInfo: " +mName);
         if (itemDic.ContainsKey(mName)) {
             return;
         }
         GameObject itemPrefab = resSvc.LoadPrefab(PathDefine.HPItemPrefab, true);
         itemPrefab.transform.SetParent(hpItemRoot);
         ItemEntityHP entityHP = itemPrefab.GetComponent<ItemEntityHP>();
+        entityHP.Init(hpRoot, hp);
         itemDic.Add(mName, entityHP);
     }
 }

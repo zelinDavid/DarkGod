@@ -16,8 +16,9 @@ public class BattleSys : SystemRoot {
     public override void InitSystem() {
         base.InitSystem();
         Instance = this;
-
     }
+
+
 
     //创建新的scene.并且初始化各种东西.
     public void LoadScene(int fbid) {
@@ -38,7 +39,7 @@ public class BattleSys : SystemRoot {
     private void LoadPlayer(MapCfg mapData) {
         player = ResSvc.Instance.LoadPrefab(PathDefine.AssissnBattlePlayerPrefab);
         player.transform.position = mapData.playerBornPos;
-        player.transform.localScale = new Vector3(1.5f, 1.5f, 1.5f);
+        player.transform.localScale = Vector3.one;
         player.transform.localEulerAngles = mapData.playerBornRote;
 
         //相机初始化

@@ -26,17 +26,17 @@ public class ItemEntityHP : MonoBehaviour {
     private RectTransform rect;
     private Transform rootTrans;
     private int hpCount;
-    private float scaleRate = 1.0f * Constant.ScreenStandardHeight / Screen.height;
+    public float scaleRate = 1.0f * Constant.ScreenStandardHeight / Screen.height;
     private float targetBlood;
     private float curBlood;
 
     public void Init(Transform trans, int hp) {
-        rootTrans = trans;
         hpCount = hp;
         curBlood = 1;
         hpRed.fillAmount = 1;
         hpGray.fillAmount = 1;
         rect = GetComponent<RectTransform>();
+        rootTrans = trans;
     }
 
     private void Update() {
@@ -44,9 +44,18 @@ public class ItemEntityHP : MonoBehaviour {
         UpdateBlood();
     }
 
+    // public int count = 1;
+    // public Vector3 rootTrans_position;
+
     private void UpdatePos() {
+        // if (count > 3) {
+        //     return;
+        // }
+        // count++;
+
         Vector3 screenPos = Camera.main.WorldToScreenPoint(rootTrans.position);
         rect.anchoredPosition = screenPos * scaleRate;
+        // rootTrans_position = rootTrans.position;
     }
 
     private void UpdateBlood() {
@@ -84,7 +93,5 @@ public class ItemEntityHP : MonoBehaviour {
         txtHp.text = "-" + hurt;
         hpAni.Play();
     }
-
-    
 
 }

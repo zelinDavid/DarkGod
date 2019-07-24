@@ -7,7 +7,7 @@ public class MonsterEntity : EntityBase {
 
     public override void SetBattleProps(BattleProps props) {
         int level = md.mLevel;
-        props = new BattleProps {
+        battleProp = new BattleProps {
             hp = props.hp * level,
             ad = props.ad * level,
             ap = props.ap * level,

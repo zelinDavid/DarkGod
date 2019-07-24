@@ -67,7 +67,9 @@ public class GameRoot : MonoBehaviour {
         this.playerData = msg.rspLogin.playerData;
     }
 
-
+    public void AddHpItemInfo(string mName, Transform trans, int hp){
+        dynamicWnd.AddHpItemInfo(mName,trans,hp);
+    }
 
     public void AddTips(string tip) {
         // Debug.Log("dynamicWnd" + this.dynamicWnd);
