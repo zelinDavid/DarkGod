@@ -28,7 +28,7 @@ public class BattleSys : SystemRoot {
             GameObject go = new GameObject("BattleRoot");
             go.transform.SetParent(GameRoot.Instance.transform);
             battleMgr = go.AddComponent<BattleMgr>();
-            battleMgr.Init(fbid);
+            battleMgr.Init(cfg);
             playerEntity = battleMgr.playerEntity;
             playerCtrlWnd.SetWndState();
         });
@@ -51,6 +51,10 @@ public class BattleSys : SystemRoot {
     }
 
     public void SetDir(Vector3 dir) {
+        if (playerEntity.canControl == false)
+        {
+            return;
+        }
         if (dir == Vector3.zero) {
             playerCtr.SetBlend((float) Constant.BlendIdle);
         } else {

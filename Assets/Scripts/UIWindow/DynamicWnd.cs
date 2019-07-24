@@ -10,6 +10,8 @@ public class DynamicWnd : WindowRoot {
     public Animation tipAnim;
     private Queue tipsQueue = new Queue();
     private bool isShow = false;
+    public Transform hpItemRoot;
+
     protected override void InitWnd() {
         base.InitWnd();
         SetActive(tipText, false);
@@ -19,9 +21,9 @@ public class DynamicWnd : WindowRoot {
         // Debug.Log("addTips: " + tip);
         tipsQueue.Enqueue(tip);
     }
-   
+
     private void Update() {
-    
+
         if (tipsQueue.Count > 0 && !isShow) {
             lock(tipsQueue) {
                 string tip = tipsQueue.Dequeue() as string;
@@ -48,5 +50,18 @@ public class DynamicWnd : WindowRoot {
         if (cb != null) {
             cb();
         }
+    }
+
+    private Dictionary<string, ItemEntityHP> itemDic = new Dictionary<string, ItemEntityHP>();
+    public void AddHpItemInfo(string mName, Transform trans, int hp) {
+        //创建hpUI到 hpRoot下, 更新其位置, 添加entityHp组件并添加到字典中
+        //TODO:待修改
+        if (itemDic.ContainsKey(mName)) {
+            return;
+        }
+        GameObject itemPrefab = resSvc.LoadPrefab(PathDefine.HPItemPrefab, true);
+        itemPrefab.transform.SetParent(hpItemRoot);
+        ItemEntityHP entityHP = itemPrefab.GetComponent<ItemEntityHP>();
+        itemDic.Add(mName, entityHP);
     }
 }

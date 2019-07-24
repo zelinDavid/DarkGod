@@ -169,8 +169,8 @@ public abstract class EntityBase {
         return controller.gameObject.GetComponent<AudioSource>();
     }
 
-    public void SetBattleProps(BattleProps props) {
-        this.battleProp = props;
+    public virtual void SetBattleProps(BattleProps props) {
+        battleProp = props;
         HP = props.hp;
     }
 
