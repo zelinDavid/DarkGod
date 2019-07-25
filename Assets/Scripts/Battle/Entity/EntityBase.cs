@@ -1,6 +1,6 @@
-using System.Linq;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 
 using UnityEngine;
 
@@ -49,7 +49,7 @@ public abstract class EntityBase {
     }
 
     public void SkillAttack(int skillID) {
-        skillMgr.SkillAttack(this, skillID) ;
+        skillMgr.SkillAttack(this, skillID);
         //TODO: 你上次写到这里
 
     }
@@ -63,6 +63,7 @@ public abstract class EntityBase {
     }
 
     public void Die() {
+        battleProp.hp = 0;
         stateMgr.ChangeStatus(this, AniState.Die, null);
     }
 
@@ -78,9 +79,6 @@ public abstract class EntityBase {
             } else {
                 nextSkillID = 0;
             }
-            Debug.Log("ExitCurtSkill");
-            Debug.Log(nextSkillID);
-            Debug.Log(comboQue.Count);
         }
         currentSkillCfg = null;
         SetAction(Constant.ActionDefault);
@@ -181,7 +179,11 @@ public abstract class EntityBase {
         }
         controller.SetMove(move, speed);
     }
-    
+
+    public virtual bool GetBreakState() {
+        return true;
+    }
+
     public void RmvMoveCB(int tid) {
         int index = -1;
         for (int i = 0; i < skMoveCBLst.Count; i++) {
@@ -195,8 +197,20 @@ public abstract class EntityBase {
         }
     }
 
-    public void AddComnQueue(int skillID){
+    public void AddComnQueue(int skillID) {
         comboQue.Enqueue(skillID);
-     
+
+    }
+
+    public virtual Vector3 GetPos() {
+        return controller.transform.position;
+    }
+
+    public virtual Vector3 GetForward() {
+        return controller.transform.forward;
+    }
+
+    public string GetName() {
+        return controller.gameObject.name;
     }
 }

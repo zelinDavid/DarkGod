@@ -21,7 +21,7 @@ public class LoginSys : SystemRoot {
 
         Debug.Log("init loginSys");
 
-        Invoke("Test", 0.1f);
+        Invoke("Test", 2f);
     }
 
     private void Test(){

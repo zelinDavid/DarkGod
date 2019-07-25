@@ -65,7 +65,7 @@ public class ResSvc : MonoBehaviour {
         StartCoroutine(coroutineLoadSync(name, finishAction));
 
     }
-    private IEnumerator coroutineLoadSync(string name, Action finishAction) {
+    private IEnumerator coroutineLoadSync2(string name, Action finishAction) {
         AsyncOperation operation = SceneManager.LoadSceneAsync(name);
         operation.allowSceneActivation = false;
         GameRoot.Instance.loadingWnd.SetWndState(true);
@@ -100,7 +100,7 @@ public class ResSvc : MonoBehaviour {
         finishAction();
     }
 
-    private IEnumerator coroutineLoadSync111(string name, Action finishAction) {
+    private IEnumerator coroutineLoadSync(string name, Action finishAction) {
         AsyncOperation operation = SceneManager.LoadSceneAsync(name);
         operation.allowSceneActivation = false;
         GameRoot.Instance.loadingWnd.SetWndState(true);
@@ -108,22 +108,22 @@ public class ResSvc : MonoBehaviour {
 
         float progress;
         float currentProgress = 0;
-        while (operation.progress < 0.9f) {
-            progress = operation.progress;
-            while (currentProgress < progress) {
-                currentProgress += 0.01f;
-                GameRoot.Instance.loadingWnd.SetProgress(currentProgress);
-                yield return null;
-            }
-        }
+        // while (operation.progress < 0.9f) {
+        //     progress = operation.progress;
+        //     while (currentProgress < progress) {
+        //         currentProgress += 0.01f;
+        //         GameRoot.Instance.loadingWnd.SetProgress(currentProgress);
+        //         yield return null;
+        //     }
+        // }
         operation.allowSceneActivation = true;
         progress = 0.98f;
-        while (currentProgress < progress) {
-            currentProgress += 0.01f;
-            GameRoot.Instance.loadingWnd.SetProgress(currentProgress);
+        // while (currentProgress < progress) {
+        //     currentProgress += 0.01f;
+        //     GameRoot.Instance.loadingWnd.SetProgress(currentProgress);
 
-            yield return null;
-        }
+        //     yield return null;
+        // }
         // Debug.Log("coroutineLoadSync Finish");
 
         while (operation.isDone == false) {

@@ -18,23 +18,27 @@ public class BattleSys : SystemRoot {
         Instance = this;
     }
 
-
-
     //创建新的scene.并且初始化各种东西.
     public void LoadScene(int fbid) {
         MapCfg cfg = ResSvc.Instance.GetMapCfg(fbid);
         ResSvc.Instance.AsyncLoadScene(cfg.sceneName, () => {
             audioSvc.PlayBgAudio(Constant.BGHuangYe);
             LoadPlayer(cfg);
+            playerCtrlWnd.SetWndState();
             GameObject go = new GameObject("BattleRoot");
             go.transform.SetParent(GameRoot.Instance.transform);
             battleMgr = go.AddComponent<BattleMgr>();
             battleMgr.Init(cfg);
             playerEntity = battleMgr.playerEntity;
-            playerCtrlWnd.SetWndState();
+            playerEntity.controller.gameObject.SetActive(false);
+            Invoke("Born", 0.1f);
         });
     }
 
+    private void Born() {
+        playerEntity.controller.gameObject.SetActive(true);
+        playerEntity.Born();
+    }
     //TODO:根据配置表中的信息加载人物位置
     private void LoadPlayer(MapCfg mapData) {
         player = ResSvc.Instance.LoadPrefab(PathDefine.AssissnBattlePlayerPrefab);
@@ -52,8 +56,7 @@ public class BattleSys : SystemRoot {
     }
 
     public void SetDir(Vector3 dir) {
-        if (playerEntity.canControl == false)
-        {
+        if (playerEntity.canControl == false) {
             return;
         }
         if (dir == Vector3.zero) {
@@ -87,10 +90,10 @@ public class BattleSys : SystemRoot {
     }
 
     private double lastAtTime = 0;
-    private int[] comBoArr = new int[] { 111, 112, 113, 114, 115};
+    private int[] comBoArr = new int[] { 111, 112, 113, 114, 115 };
     public int comboIndex = 0;
     private void ReleaseNormal() {
-        Debug.Log( playerEntity.currentAniState);
+        Debug.Log(playerEntity.currentAniState);
         if (playerEntity.currentAniState == AniState.Idle || playerEntity.currentAniState == AniState.Move) {
             playerEntity.Attack(comBoArr[0]);
             comboIndex = 0;
@@ -98,9 +101,9 @@ public class BattleSys : SystemRoot {
         } else if (playerEntity.currentAniState == AniState.Attack && lastAtTime != 0) {
             if (comboIndex == comBoArr.Length - 1) {
                 comboIndex = 0;
-                lastAtTime = 0;  
-            }else if(TimeSvc.Instance.GetNowTime() - lastAtTime < Constant.ComboSpace && lastAtTime != 0){
-                comboIndex ++;
+                lastAtTime = 0;
+            } else if (TimeSvc.Instance.GetNowTime() - lastAtTime < Constant.ComboSpace && lastAtTime != 0) {
+                comboIndex++;
                 playerEntity.AddComnQueue(comBoArr[comboIndex]);
                 lastAtTime = TimeSvc.Instance.GetNowTime();
             }
@@ -112,12 +115,15 @@ public class BattleSys : SystemRoot {
         playerEntity.Attack(101);
     }
     private void ReleaseSkill2() {
-
         playerEntity.Attack(102);
     }
-    private void ReleaseSkill3() {
 
+    private void ReleaseSkill3() {
         playerEntity.Attack(103);
     }
 
+    public void RmMonsterByKey(string name) {
+        battleMgr.RmMonsterByKey(name);
+        GameRoot.Instance.dynamicWnd.RemoveHP(name);
+    }
 }

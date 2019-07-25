@@ -11,7 +11,7 @@ using UnityEngine;
 
 public class GameRoot : MonoBehaviour {
     public static GameRoot Instance = null;
-    private DynamicWnd dynamicWnd;
+    public DynamicWnd dynamicWnd;
     public LoadingWnd loadingWnd;
     private BattleSys battleSys;
 

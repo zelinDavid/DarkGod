@@ -53,14 +53,15 @@ public class BattleMgr : MonoBehaviour {
         };
         playerEntity.SetBattleProps(props);
         //初始化装填
-        playerEntity.Born();
+        
     }
 
     public void Attack(int skillID) {
         playerEntity.Attack(skillID);
     }
 
-    private Dictionary<string,MonsterEntity> monsterDic = new Dictionary<string, MonsterEntity>();
+    //TODO:
+    public Dictionary<string,MonsterEntity> monsterDic = new Dictionary<string, MonsterEntity>();
     public void LoadMonsterByWaveID(int wave) {
         foreach (MonsterData md in mapCfg.monsterLst) {
             if (md.mWave == wave) {
@@ -85,5 +86,26 @@ public class BattleMgr : MonoBehaviour {
                 }
             }
         }
+        Debug.Log("monsters: " + monsterDic.Keys.Count);
     }
+    
+    private List<MonsterEntity> monsters = new List<MonsterEntity>();
+    public List<MonsterEntity> GetMonsterList(){
+        monsters.Clear();
+        foreach (var item in monsterDic)
+        {
+            monsters.Add(item.Value);
+        }
+        return monsters;
+    }
+
+    public void RmMonsterByKey(string key){
+        if (monsterDic.TryGetValue(key, out MonsterEntity monster))
+        {
+            monsterDic.Remove(key);
+            GameRoot.Instance.dynamicWnd.RemoveHP(key);
+        }
+    }
+    
+    
 }

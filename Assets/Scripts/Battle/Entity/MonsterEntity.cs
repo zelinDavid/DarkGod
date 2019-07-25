@@ -20,5 +20,16 @@ public class MonsterEntity : EntityBase {
         HP = props.hp;
     }
 
-    
+      public override bool GetBreakState(){
+        if (md.mCfg.isStop)
+        {
+            if(currentSkillCfg != null){
+                return currentSkillCfg.isBreak;
+            }
+            return true;
+        }else{
+            return false;
+        }
+    }
+
 }

@@ -60,7 +60,7 @@ public class DynamicWnd : WindowRoot {
     /// <param name="trans">对象血条所在位置到的transform</param>
     /// <param name="hp">血量</param>
     public void AddHpItemInfo(string mName, Transform hpRoot, int hp) {
-        Debug.Log("AddHpItemInfo: " +mName);
+        Debug.Log("AddHpItemInfo: " + mName);
         if (itemDic.ContainsKey(mName)) {
             return;
         }
@@ -70,4 +70,30 @@ public class DynamicWnd : WindowRoot {
         entityHP.Init(hpRoot, hp);
         itemDic.Add(mName, entityHP);
     }
+
+    public void RemoveHP(string name) {
+        if (itemDic.TryGetValue(name, out ItemEntityHP obj)) {
+            itemDic.Remove(name);
+            obj.gameObject.SetActive(false);
+        }
+    }
+
+    public void ShowDodge(string name) {
+        if (itemDic.TryGetValue(name, out ItemEntityHP itemHp)) {
+            itemHp.SetDodge();
+        }
+    }
+
+    public void ShowCritical(string name, int damage) {
+        if (itemDic.TryGetValue(name, out ItemEntityHP itemHp)) {
+            itemHp.SetCritical(damage);
+        }
+    }
+    
+    public void SetHurt(string name, int damage) {
+        if (itemDic.TryGetValue(name, out ItemEntityHP itemHp)) {
+            itemHp.SetHurt(damage);
+        }
+    }
+
 }
