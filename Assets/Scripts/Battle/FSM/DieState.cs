@@ -19,10 +19,11 @@ public class DieState : IState
     {
          entity.SetAction(Constant.ActionDie);
          if (entity.entityType == EntityType.Monster)
-         {
+         { 
              entity.controller.enabled = false;
              TimeSvc.Instance.AddTimeTask((deltaTime)=> {
                  entity.SetActive(false);
+                 Object.Destroy(entity.controller.gameObject);
              },Constant.DieAniLength);
          }
     }

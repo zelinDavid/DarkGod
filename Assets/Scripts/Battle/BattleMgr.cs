@@ -77,6 +77,7 @@ public class BattleMgr : MonoBehaviour {
                 MonsterEntity monsterEntity = new MonsterEntity(this, stateMgr, skillMgr, monsterCt);
                 monsterEntity.md = md;
                 monsterEntity.SetBattleProps(md.mCfg.bps);
+                monsterEntity.Born();
                 monsterDic.Add(go.name, monsterEntity);
                 if (md.mCfg.mType == MonsterType.Boss)
                 {

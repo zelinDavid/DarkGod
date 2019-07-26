@@ -93,7 +93,7 @@ public class BattleSys : SystemRoot {
     private int[] comBoArr = new int[] { 111, 112, 113, 114, 115 };
     public int comboIndex = 0;
     private void ReleaseNormal() {
-        Debug.Log(playerEntity.currentAniState);
+        Debug.Log("ReleaseNormal" + playerEntity.currentAniState);
         if (playerEntity.currentAniState == AniState.Idle || playerEntity.currentAniState == AniState.Move) {
             playerEntity.Attack(comBoArr[0]);
             comboIndex = 0;
@@ -125,5 +125,22 @@ public class BattleSys : SystemRoot {
     public void RmMonsterByKey(string name) {
         battleMgr.RmMonsterByKey(name);
         GameRoot.Instance.dynamicWnd.RemoveHP(name);
+    }
+
+    public void EndBattle(bool isWin, int resHp) {
+        // d
+    }
+
+    public void clickExitBtn(){
+        // audioSvc.play
+        MainCitySys.Instance.EnterMainCity();
+        
+    }
+
+    public void DestoryBattle(){
+        playerCtrlWnd.SetWndState(false);
+        GameRoot.Instance.dynamicWnd.RmAllHpInfo();
+        MainCitySys.Instance.EnterMainCity();
+        Destroy(battleMgr.gameObject);
     }
 }

@@ -102,7 +102,8 @@ public class ItemEntityHP : MonoBehaviour {
         float newRate = curBloodValue / hpCount;
         targetBlood = newRate;
         hpRed.fillAmount = targetBlood;
-        if (targetBlood == 0) {
+        Debug.Log("targetBlood:" + (targetBlood < 0));
+        if (targetBlood <= 0) {
             Destroy(this.gameObject);
         }
     }

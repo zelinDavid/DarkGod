@@ -78,8 +78,8 @@ public class SkillMgr : MonoBehaviour {
 
     //计算单个动作造成的伤害
     private void AttackActionDamage(EntityBase entity, SkillCfg skillCfg, int index) {
-         int actionID = skillCfg.skillActionLst[index];
-        
+        int actionID = skillCfg.skillActionLst[index];
+
         SkillActionCfg actionCfg = ResSvc.Instance.GetSkillActionCfg(actionID);
         if (entity.entityType == EntityType.Player) {
             List<MonsterEntity> monsters = entity.battleMgr.GetMonsterList();
@@ -125,14 +125,14 @@ public class SkillMgr : MonoBehaviour {
      */
     private System.Random random = new System.Random();
     private void CalDamage(EntityBase entity, EntityBase target, SkillCfg cfg, int index) {
-     
+
         DynamicWnd wnd = GameRoot.Instance.dynamicWnd;
         int damage = cfg.skillDamageLst[index];
         if (cfg.dmgType == DamageType.AD) {
             int rd = PETools.RDInt(1, 100, random);
             if (rd < 50) { //miss
                 wnd.ShowDodge(target.GetName());
-                Debug.Log("missssssssssss");
+            
                 return;
             }
 
@@ -141,29 +141,33 @@ public class SkillMgr : MonoBehaviour {
                 float criticalRate = 1 + baoji / 100;
                 damage += (int) (criticalRate * damage);
                 wnd.ShowCritical(target.GetName(), damage);
-                Debug.Log("Baoji");
-
+         
             }
             // int addef = (int) (1 - entity.battleProp.pierce / 100) * target.battleProp.addef;
             int addef = 0;
             damage -= addef;
 
         } else if (cfg.dmgType == DamageType.AP) {
-
+            //计算属性加成
+            damage += entity.battleProp.ap;
+            //计算魔法抗性
+            damage -= target.battleProp.apdef;
         } else {}
-        damage = 300;
         
+        damage = 100;
         if (damage < 0) {
             damage = 0;
             return;
         }
         wnd.SetHurt(target.GetName(), damage);
-
+        target.battleProp.hp -= damage;
+        //TODO:你上次写到这里
+        Debug.Log("damage hp:" + damage + " " + target.battleProp.hp);
         if (damage >= target.battleProp.hp) {
-            target.Die();
+             target.Die();
             if (target.entityType == EntityType.Monster) {
                 BattleSys.Instance.RmMonsterByKey(target.GetName());
-                Destroy(target.controller.gameObject);
+                
             } else if (target.entityType == EntityType.Player) {
                 Debug.LogWarning("战斗结束");
                 //TODO: 战斗结束逻辑

@@ -113,7 +113,7 @@ public class Constant {
     public const int ActionHit = 101;
 
 
-    public const int DieAniLength = 5000;
+    public const int DieAniLength = 2267;
 
 
     //混合参数

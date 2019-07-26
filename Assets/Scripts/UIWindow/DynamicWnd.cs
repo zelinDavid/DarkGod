@@ -74,7 +74,9 @@ public class DynamicWnd : WindowRoot {
     public void RemoveHP(string name) {
         if (itemDic.TryGetValue(name, out ItemEntityHP obj)) {
             itemDic.Remove(name);
+            Debug.Log("RemoveHP:" + name);
             obj.gameObject.SetActive(false);
+            Destroy(obj.gameObject);
         }
     }
 
@@ -89,11 +91,20 @@ public class DynamicWnd : WindowRoot {
             itemHp.SetCritical(damage);
         }
     }
-    
+
     public void SetHurt(string name, int damage) {
         if (itemDic.TryGetValue(name, out ItemEntityHP itemHp)) {
             itemHp.SetHurt(damage);
         }
     }
 
+    public void RmAllHpInfo() {
+        foreach (var item in itemDic) {
+
+            Destroy(item.Value.gameObject);
+             
+
+        }
+        itemDic.Clear();
+    }
 }

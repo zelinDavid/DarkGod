@@ -37,6 +37,8 @@ public class PlayerCtrWnd : WindowRoot {
     public Text bossText;
     public Image bossImg;
 
+    public Button  playerHead;
+
     private bool isSkill1CD;
     private bool isSkill2CD;
     private bool isSkill3CD;
@@ -57,7 +59,6 @@ public class PlayerCtrWnd : WindowRoot {
  
     protected override void InitWnd() {
         base.InitWnd();
-        RegisterTouchEvents();
         SetActive(imgDirPoint, false);
         battleSys = BattleSys.Instance;
         sk1CDTime = resSvc.GetSkillCfg(101).cdTime / 1000.0f;
@@ -66,6 +67,9 @@ public class PlayerCtrWnd : WindowRoot {
   
     }
 
+    private void Start() {
+        RegisterTouchEvents();
+    }
     private void Update() {
         if (isSkill1CD) {
             sk1TimeCount += Time.deltaTime;
@@ -196,8 +200,12 @@ public class PlayerCtrWnd : WindowRoot {
 
         normalAttack.onClick.AddListener(() => {
             battleSys.Attack(3);
+            Debug.Log("test2");
         });
-
+ 
+        playerHead.onClick.AddListener(()=> {
+            battleSys.DestoryBattle();
+        });
     }
 
     private bool CanReleaseSkill() {

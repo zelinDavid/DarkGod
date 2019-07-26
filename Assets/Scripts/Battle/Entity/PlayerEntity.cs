@@ -9,7 +9,7 @@ public class PlayerEntity : EntityBase
         canReleaseSkill = true;
         canControl = true;
         entityType = EntityType.Player;
-
+        RemoveSkillCB();
     }
 
       

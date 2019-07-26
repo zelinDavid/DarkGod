@@ -33,7 +33,7 @@ public abstract class EntityBase {
         stateMgr = state;
         skillMgr = skill;
         controller = control;
-
+        RemoveSkillCB();
     }
 
     public void Idle() {

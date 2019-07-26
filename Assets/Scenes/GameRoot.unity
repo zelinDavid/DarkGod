@@ -7862,6 +7862,7 @@ MonoBehaviour:
   level: {fileID: 1720659391}
   bossText: {fileID: 752009857}
   bossImg: {fileID: 1040673509}
+  playerHead: {fileID: 1694885795}
 --- !u!1 &1026222731
 GameObject:
   m_ObjectHideFlags: 0
@@ -12028,8 +12029,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1973066238}
-        m_MethodName: ClickMeBtn
+      - m_Target: {fileID: 0}
+        m_MethodName: 
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -14044,6 +14045,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 79c449bb3d8ac5c49ac96e44e0cf35bd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  dynamicWnd: {fileID: 0}
   loadingWnd: {fileID: 171448184}
   playerData:
     id: 0
