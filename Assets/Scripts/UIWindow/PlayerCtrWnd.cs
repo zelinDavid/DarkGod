@@ -1,3 +1,5 @@
+using PEProtocol;
+
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
@@ -29,15 +31,7 @@ public class PlayerCtrWnd : WindowRoot {
 
     public Button normalAttack;
 
-    public Image energy;
-    public Image blood;
-    public Text bloodText;
-    public Text level;
-
-    public Text bossText;
-    public Image bossImg;
-
-    public Button  playerHead;
+    public Button playerHead;
 
     private bool isSkill1CD;
     private bool isSkill2CD;
@@ -55,8 +49,10 @@ public class PlayerCtrWnd : WindowRoot {
     private float sk2Num = 0;
     private float sk3Num = 0;
 
+    public int hp = 2183;
+    public int currentHp = 2183;
     private BattleSys battleSys;
- 
+
     protected override void InitWnd() {
         base.InitWnd();
         SetActive(imgDirPoint, false);
@@ -64,7 +60,8 @@ public class PlayerCtrWnd : WindowRoot {
         sk1CDTime = resSvc.GetSkillCfg(101).cdTime / 1000.0f;
         sk2CDTime = resSvc.GetSkillCfg(102).cdTime / 1000.0f;
         sk3CDTime = resSvc.GetSkillCfg(103).cdTime / 1000.0f;
-  
+        currentHp = 2183;
+        HideBoss();
     }
 
     private void Start() {
@@ -202,20 +199,56 @@ public class PlayerCtrWnd : WindowRoot {
             battleSys.Attack(3);
             Debug.Log("test2");
         });
- 
-        playerHead.onClick.AddListener(()=> {
+
+        playerHead.onClick.AddListener(() => {
             battleSys.DestoryBattle();
         });
     }
 
     private bool CanReleaseSkill() {
         bool ret = BattleSys.Instance.CanReleaseSkill();
-        Debug.Log("canReleaseSkill:" + ret);
         return ret;
 
     }
 
-}
+    public Image energy;
+    public Image blood;
+    public Text bloodText;
+    public Text level;
+    public void UpdatePlayerData(PlayerData pd) {
+        Debug.Log(pd);
+        level.text = pd.lv.ToString();
+        energy.fillAmount = pd.power;
+        bloodText.text = pd.hp.ToString();
+    }
 
+    public void UpdateHP(int damage) {
+        currentHp -= damage;
+        currentHp = currentHp > 0 ? currentHp : 0;
+        float hpRate = (float)currentHp / hp;
+        blood.fillAmount = hpRate;
+        bloodText.text = string.Format("{0} / {1}",currentHp, hp);
+    }
+
+    public Text bossText;
+    public Image bossImg;
+    public Image bossYellow;
+    public Image bossRed;
+    public void UpdateBoss(MonsterData md) {
+        bossText.text = md.mCfg.mName;
+        bossImg.sprite = resSvc.LoadSprite(md.mCfg.resPath, true);
+    }
+
+    private void HideBoss() {
+        bossImg.transform.parent.gameObject.SetActive(false);
+    }
+
+    private void ShowBoss() {
+        bossImg.transform.parent.gameObject.SetActive(true);
+        bossYellow.fillAmount = 1;
+        bossRed.fillAmount = 1;
+    }
+
+}
 
 // 抓紧时间学习吧, 锻炼, 学习.

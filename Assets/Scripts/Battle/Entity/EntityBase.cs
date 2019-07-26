@@ -213,4 +213,6 @@ public abstract class EntityBase {
     public string GetName() {
         return controller.gameObject.name;
     }
+
+    public abstract void SetHurt(int damage);
 }

@@ -21,6 +21,7 @@ public class WindowRoot : MonoBehaviour {
         } else {
             ClearWnd();
         }
+       
     }
 
     protected virtual void InitWnd() {

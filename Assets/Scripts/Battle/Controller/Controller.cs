@@ -46,7 +46,7 @@ public class Controller : MonoBehaviour {
         ani.SetInteger("Action", act);
     }
     public virtual void SetFX(string name, float destory) {
-
+         
     }
 
     public virtual void SetMove(bool move, float speed) {

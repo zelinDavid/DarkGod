@@ -22,9 +22,9 @@ public class IdleState : IState {
              */
             if (entity.entityType == EntityType.Player) {
                 entity.canReleaseSkill = true;
-                Debug.Log("IDle CanReleaseSkill");
+                // Debug.Log("IDle CanReleaseSkill");
             }
-            Debug.Log("entityType:" + (entity.entityType == EntityType.Player));
+            // Debug.Log("entityType:" + (entity.entityType == EntityType.Player));
 
 
             if (entity.GetDirInput() != Vector2.zero) {

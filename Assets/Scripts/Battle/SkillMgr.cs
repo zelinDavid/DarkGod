@@ -88,8 +88,10 @@ public class SkillMgr : MonoBehaviour {
                     CalDamage(entity, monster, skillCfg, index);
                 }
             }
-        } else {
-
+        } else if(entity.entityType == EntityType.Monster){
+            if (IsInRange(entity, entity.battleMgr.playerEntity, actionCfg) && IsInAngle(entity, entity.battleMgr.playerEntity, actionCfg)) {
+                    CalDamage(entity, entity.battleMgr.playerEntity, skillCfg, index);
+                }
         }
     }
 
@@ -132,7 +134,6 @@ public class SkillMgr : MonoBehaviour {
             int rd = PETools.RDInt(1, 100, random);
             if (rd < 50) { //miss
                 wnd.ShowDodge(target.GetName());
-            
                 return;
             }
 
@@ -141,7 +142,7 @@ public class SkillMgr : MonoBehaviour {
                 float criticalRate = 1 + baoji / 100;
                 damage += (int) (criticalRate * damage);
                 wnd.ShowCritical(target.GetName(), damage);
-         
+
             }
             // int addef = (int) (1 - entity.battleProp.pierce / 100) * target.battleProp.addef;
             int addef = 0;
@@ -153,23 +154,27 @@ public class SkillMgr : MonoBehaviour {
             //计算魔法抗性
             damage -= target.battleProp.apdef;
         } else {}
-        
-        damage = 100;
+        //TODO:warning test data
+        if (entity.entityType == EntityType.Player) {
+            damage = 100;
+        }
         if (damage < 0) {
             damage = 0;
             return;
         }
-        wnd.SetHurt(target.GetName(), damage);
+ 
+        target.SetHurt(damage);
         target.battleProp.hp -= damage;
         //TODO:你上次写到这里
-        Debug.Log("damage hp:" + damage + " " + target.battleProp.hp);
+        
         if (damage >= target.battleProp.hp) {
-             target.Die();
+            target.Die();
             if (target.entityType == EntityType.Monster) {
                 BattleSys.Instance.RmMonsterByKey(target.GetName());
-                
+
             } else if (target.entityType == EntityType.Player) {
-                Debug.LogWarning("战斗结束");
+                GameRoot.Instance.dynamicWnd.AddTips("战斗结束!");
+                BattleSys.Instance.DestoryBattle();
                 //TODO: 战斗结束逻辑
             }
         } else {
@@ -224,10 +229,10 @@ public class SkillMgr : MonoBehaviour {
         entity.skillEndCB = timer.AddTimeTask((timeID) => {
             entity.Idle();
             entity.skillEndCB = -1;
-            Debug.Log("skillEndCB: ");
+            // Debug.Log("skillEndCB: ");
         }, skillCfg.skillTime);
 
-        Debug.Log("timer:  " + timer);
+        // Debug.Log("timer:  " + timer);
     }
 
     private void CalMoveDistance(EntityBase entity, int skillID) {

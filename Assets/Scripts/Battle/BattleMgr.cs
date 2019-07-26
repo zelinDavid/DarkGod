@@ -60,6 +60,17 @@ public class BattleMgr : MonoBehaviour {
         playerEntity.Attack(skillID);
     }
 
+    private void Update()
+    {
+        foreach (var item in monsterDic)
+        {
+            if (item.Value != null)
+            {
+                item.Value.TrackPlayer();                
+            }
+        }
+    }
+
     //TODO:
     public Dictionary<string,MonsterEntity> monsterDic = new Dictionary<string, MonsterEntity>();
     public void LoadMonsterByWaveID(int wave) {
